@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=720px, height=1280px" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>semperhhhの博客</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- 首页 -->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <link rel="stylesheet" href="../css/markdown.css">
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+</head>
+
+<body class="main_index">
+    <div class="box">
+        {{{navigationBar}}}
+
+        <div class="col-md-12">
+            <div style="height:80px;"></div>
+            <div class="col-md-9 postsBackground center-block">
+                <div style="height:60px;"></div>
+                {{{POSTS_CONTENT}}}
+                <div style="height:60px;"></div>
+                <!-- 分割线 -->
+                <div class="span-1">------------------------------</div>
+
+                <div class="l-center">
+                    <!-- 点赞 -->
+                    <span class="button-wrap">
+                        <button class="button button-circle button-raised button-primary"
+                            onclick="likeClick()">赞</button>
+                    </span>
+                    <!-- 打赏 -->
+                    <span class="button-wrap">
+                        <button class="button button-circle button-raised button-royal"
+                            onclick="rewardClick()">赏</button>
+                    </span>
+                </div>
+                <div style="height:60px;"></div>
+            </div>
+            <div style="height:80px;"></div>
+        </div>
+</body>
+
+<script>
+
+    // document.body.addEventListener("click", function () {
+    //     alert("likeClick");
+    // });
+
+    var request = new XMLHttpRequest(); //新建XMLHttpRequest对象
+    request.onreadystatechange = function () { //状态发生变化时,函数被回调
+
+        if (request.readyState === 4) { // 成功完成
+            if (request.status === 200) {
+                alert("成功");
+            } else {
+                alert("失败");
+            }
+        } else {
+            console.log("http请求还在继续");
+        }
+    }
+
+    function likeClick() {
+
+        alert("谢谢你的喜欢~");
+
+        //发送请求:
+        request.open("GET", "/posts/likeClick/{{POSTS_TITLE}}");
+        request.send();
+    }
+
+    function rewardClick() {
+        alert("谢谢你的打赏~");
+
+        //发送请求:
+        request.open("GET", "/posts/rewardClick/{{POSTS_TITLE}}");
+        request.send();
+    }
+
+</script>
+
+</html>

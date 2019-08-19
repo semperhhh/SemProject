@@ -1,0 +1,143 @@
+<hr>
+
+<h1>iOS-&lt;&lt;改善objective-c程序的61个建议&gt;&gt;(上)</h1>
+
+<p><img src="https://blog-1256512148.cos.ap-beijing.myqcloud.com/iOS0004.png" width="300" hegiht="300" align=center /></p>
+
+<blockquote>
+<p>买了一些书在看,总结了一些&lt;编写高质量代码-改善objective-c程序的61个建议&gt;中的内容</p>
+</blockquote>
+
+<h3>基础篇</h3>
+
+<h4>在头文件中尽量减少其他头文件的引用</h4>
+
+<p>在面向对象开发语言中,对于类的描述,通常划分为头文件和源文件,头文件用于描述类的声明和可公开部分,而源文件用于描述类的方法或函数的具体实现,这也体现了面向对象语言的&quot;封闭性&quot;和&quot;高内聚低耦合&quot;的特性.&lt;!--more--&gt;
+在oop(面向对象编程)中有两个技术用于描述类与类或对象之间的关系:一个是继承;另一个是复合.在objective-c中,当一个类需要引用另一个类,即建立复合关系时,需要在类的头文件中,通过&quot;#import&quot;修饰符俩建立被引用类的指针.<br/></p>
+
+<p>使用关键字@class:假如有100个头文件,都用&quot;#import&quot;引用了同一个头文件,那么头文件有变化时,后面所有引用它的类都需要重新编译,这将耗费大量的时间,而使用@class则不会.同时使用@class可以避免&quot;类循环依赖&quot;出现的编译错误.当然还是尽量避免&quot;类循环依赖&quot;的出现.<br/></p>
+
+<p>在一个头文件中包含多个类的生命定义时,要与该头文件生命的多个类建立复合关系,还是要采用关键字&quot;#import&quot;<br/></p>
+
+<p>这些的核心目的是&quot;降低类与类之间的耦合度&quot;,在自己设计类的时候,除了&quot;#import&quot;和&quot;#class&quot;之外,有没有一种更好的方式?<br/>
+有的,一种是通过使<em>用模块方式与多类建立复合关系</em>;另一种是通过使用&quot;协议&quot;的方式来实现.<br/></p>
+
+<h4>尽量使用模块方式与多类建立复合关系</h4>
+
+<p>&quot;#import&quot;实质上是objective-c为了避免重复引用可能带来的编译错误(比如重复的引用)而加入的,保证每个头文件只会被引用一次.<br/>
+&quot;#import&quot;的实现是通过对#ifndef一个标志进行判断,然后在引入#define这个标志,来避免重复引用的.<br/>
+&quot;import&quot;其根本上就是简单的复制,粘贴,将目标.h文件中的内容一字不落复制到当前文件中,后者可以避免多次的重复引用.<br/>
+在编写objective-c代码中,<em>#import UIKit/UIKit.h</em>引入这个库其实意味着每个文件编译都超过11000行代码.<br/></p>
+
+<p>&quot;利用模块(modules)来解决历史问题-事半功倍&quot;<br/>
+模块功能,其应用不仅仅表现于编译的速度加快,同事在链接框架等方面也非常好用.<br/>
+启动模块功能后,编译器会隐式地把所有的#import都转换成@import.<br/>
+语法有一点小小的改动,用&quot;@import&quot;代替&quot;#import&quot;<br/>
+技术上,自己不需要吧所有的#import都换成@import,因为编译器会隐式地转换它们,但是还是建议尽可能地用新的语法来编写代码.<br/></p>
+
+<h4>尽量使用const,enum来替换预处理#define</h4>
+
+<p>&quot;#define&quot;定义了一个宏,在编译开始之前就会被替换.const只是对变量进行修饰,当试图去修改该变量时,编译器会报错.在一些场合你只能用&quot;define&quot;,而不能用const.理论上来说,const不仅在运行时需要占用空间,而且还需要一个内存的引用,但从时间上来说,这是无关紧要的,编译器可能会对其进项优化.<br/>
+&quot;#define&quot;在理论上来说更高效,但在现代编译器上,他们可能没什么不同.<br/>
+&quot;#define&quot;会更安全,因为当师徒赋值给它是,总会出现一个编译器错误.<br/>
+因此,相对字符串字面量或数字,更推荐使用常量.应使用static方式声明常量,而非使用#define的方式来定义宏.<br/></p>
+
+<p>对于整形类型,代替&quot;#define&quot;比较好的方式是使用enum,在使用enum时,推荐使用最新的NS<em>ENUM和NS</em>OPTIONS宏.<br/></p>
+
+<p><em>要点</em>: 尽量避免使用&quot;#define&quot;预处理命令,&quot;#define&quot;预处理命令不包含任何的类型信息,仅仅是在编译前做替换操作.他们在重复定义时不会发出警告,容易在整个程序中产生不一致的值.</p>
+
+<h4>优先使用对象字面量语法而非等效方法</h4>
+
+<p>使用对象字面量语法来创建字符串,数字,数组和字典等,比使用以前的常规对象创建方法语法更为精简,同时可以避免一些常见的陷阱.<br/>
+对象字面量语法特性是完全向下兼容的.<br/>
+使用对象字面量语法时,容器类的不可是nil,否则运行时将会抛出异常.<br/></p>
+
+<blockquote>
+<p>在创建可变字典,无法判断值是否为nil时,可以用<em>dict setObject:&lt;#(nonnull id)#&gt; forKey:&lt;#(nonnull id<NSCopying>)#&gt;</em>这个方法给字典添加键值队,注意,在使用<em>dict setValue:&lt;#(nullable id)#&gt; forKey:&lt;#(nonnull NSString *)#&gt;</em>时如果值为nil还是会抛出异常.</p>
+</blockquote>
+
+<h4>处理隐藏的返回类型,优先选择实例类型而非id</h4>
+
+<p>实例类型(instancetype)不仅可以作为方法返回的实例的类型,且能用这个实例类型来作为想编译器的提示,提示方法返回的类型将是方法所属的类的实例.<br/>
+使用instancetype可避免隐式转换id而造成的欺骗性编译无误通过的现象,防止程序正式运行时出现崩溃现象,可以大大改善objective-c代码的类型安全.<br/>
+在某一个特定区域,instancetype可以代替id,但并不是所有.<br/>
+~~~~objective-c
+@interface myObject : NSObject
++(id)factoryMethodB;
+@end
+@implementation myObject
++(id)factoryMethodB {
+    retur [[[self class]alloc]init];
+}
+@end</p>
+
+<p>myObject *ob = [[myObject factoryMethodB]count];//myobject类并没有count方法,但是编译器不会报错,因为id类型的对象可以作为任何类,并且其他一些类中有count方法.如果换成instancetype则会发出警告
+~~~~</p>
+
+<h4>高度警惕空指针和野指针的袭击</h4>
+
+<p>没有存储任何内存地址的指针就称为空指针(NULL指针).空指针就是被赋值为0的指针,在没有被具体初始化之前,其值为0.也就是说,一个指针变量分配一个NULL值的情况下,没有确切的地址被分配.<br/>
+野指针不是NULL指针,而是指向&quot;垃圾&quot;内存(不可用内存)的指针.野指针是非常危险的.利用野指针发消息时很危险的,会报错.<br/>
+利用空指针发消息时没有任何问题的,也就是说代码是没有错误的.<br/></p>
+
+<h4>清楚常量字符串和一般字符串的区别</h4>
+
+<pre><code class="lang-objective-c">NSString *string1 = @&quot;hello&quot;;
+NSString *string2 = @&quot;hello&quot;;
+if (string1 == string2)
+{
+    NSLog(@&quot;same&quot;);
+}
+</code></pre>
+
+<p>对字符串常量string1和string2的地址值进行比较,就会发现二者竟然是相等的,产生这样的结果要归咎于编译器优化的结果.<br/>
+由于常量会占用一块特殊的代码段,加载到内存时会映射到一块常量存储区,以加快访问速度.编译器在编译时发现string1和string2的内容是相同的常量字符串,会把他们都指向一个相同的区域,而不是再开辟一块额外的空间.因此,他们是相同的地址值.<br/></p>
+
+<p>如果使用一个常量字符串来初始化另一个字符串,另一个字符串会直接通过地址赋值为常量字符串,alloc的内存也会立即释放.</p>
+
+<h4>在访问集合时要优先考虑使用快速枚举</h4>
+
+<p>快速;枚举是一种语言中用于快速安全的枚举一个集合的表达式.<br/>
+for...in表达式,就是一种快速枚举表达式.<br/></p>
+
+<p>快速枚举是访问数组中的对象的一种比较快的方法.<br/></p>
+
+<h3>第二部分 内存管理</h3>
+
+<h4>理解内存和objective-c内存管理规则</h4>
+
+<p>Objective-c 内存管理模式基于对象的&quot;所有权&quot;上.任何对象都会被一个或多个使用者引用,只要对象还有一个使用者,该对象就应该继续存在.<br/>
+对象所有权策略是基于引用计数实现的(retaincount),每一个对象有一个retaincount变量.对象的retaincount为0时,对象被销毁.</p>
+
+<blockquote>
+<p>常见的循环引用即对象的retaincount没有减为0.</p>
+</blockquote>
+
+<p>在Objective-c中,释放对象应优先使用release而非autorelease,但在不适合立即回收对象的情况下,应优先使用autorelease.如要从某个方法返回对象.<br/>
+对于拥有alloc返回的对象而言,失去释放所有权之前,应先失去对该对象的引用.<br/></p>
+
+<h4>区别开alloc,init,retain,release,dealloc</h4>
+
+<p>alloc是创建变量,init是分配内存,dealloc是释放变量,retain是计数加1,release是计数减1.<br/>
+分配过程(alloc和init)不仅进行对象的内存分配,还要对它的isa实例变量和保持数初始化.<br/></p>
+
+<blockquote>
+<p>isa实例变量 :NSObject类作为所有oc对象的父类只有这一个属性isa.官方是这样解释的:每个对象都是通过isa实例变量连接到运行时系统，从NSObject类继承。Isa标识对象的类；它指向一个结构的类定义编译。<br/></p>
+</blockquote>
+
+<p>通过isa，可以在运行时找到一个对象的所有信息,如继承层次结构中的位置，它的实例变量的大小和结构，以及可以相应消息的方法所实现的位置。<br/></p>
+
+<h4>优先选用存取方法来简化内存管理</h4>
+
+<p>程序有一个对象类型的属性,要保证:当使用的时候,任何已经赋值了的对象都不会被销毁.被赋新值的时候,开发者必须获得对象的所有权,并放弃正在使用对象的所有权.</p>
+
+<blockquote>
+<p>即使用self.去访问实例变量.使用&quot;_&quot;访问实例变量可能会跳过存取方法直接赋值.</p>
+</blockquote>
+
+<h4>对象销毁或者被移除一定考虑所有权的释放</h4>
+
+<p>1.从集合类中移除对象,集合要释放的被释放对象所有权.<br/>
+2.防止出现父对象呗释放前而子对象没有被释放.<br/>
+3.是否有权释放对象关键要看获取的方式.
+有权释放对象关键要看获取的方式.

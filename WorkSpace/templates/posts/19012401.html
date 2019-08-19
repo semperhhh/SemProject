@@ -1,0 +1,68 @@
+<hr>
+
+<h1>iOS 接入webSocket</h1>
+
+<blockquote>
+<p>前段时间用到了webSocket,在某度了好久之后还是没有发现一些比较全面的,所以自己记录下来一点</p>
+</blockquote>
+
+<p>首先导入了square大神的SocketRocket(简称SR,应该是iOS端webSocket采用比较多的框架),比较简单,发送消息参数需要和后台约定好</p>
+
+<h4>1&gt; 创建SRWebSocket</h4>
+
+<p>我这边创建了一个webSocket的单例类,在单例类里实例化SRWebSocket并且设置代理</p>
+
+<pre><code class="lang-objective-c">SRWebSocket *webSocket;
+webSocket.delegate = nil;
+[webSocket close];
+webSocket = [[SRWebSocket alloc]initWithURLRequest:url];//这里的url是一个遵守ws协议的开头是&#39;ws://&#39;的
+webSocket.delegate = self;  //记得要遵守协议&lt;SRWebSocketDelegate&gt;,实现delegate方法
+[webSocket open];   //打开socket通道
+
+--&lt;SRWebSocketDelegate&gt;
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket;{
+    NSLog(@&quot;当进入这个代理方法的时候说明socket通道已经打开&quot;);
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    NSLog(@&quot;连接失败，这里可以实现掉线自动重连&quot;);
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;{
+
+    [webSocket close];  //关闭socket
+    webSocket = nil;
+    NSLog(@&quot;socket通道断开了,断开一般是服务器主动断开的,这个时候可以进行重连&quot;);
+
+
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;{
+
+    NSLog(@&quot;Received \&quot;%@\&quot;&quot;, message);
+    NSLog(@&quot;这里是收到服务器推来的消息 一般是JSON格式&quot;);
+}
+
+- (void)sendData:(id)data {
+
+    if (socket.readyState == SR_OPEN) {
+
+        [socket send:data];    // 发送数据,这里要socket打开才能发送,不然会crashes
+    }
+}
+
+
+
+
+</code></pre>
+
+<p>�,不然会crashes
+    }
+}
+
+
+
+
+</code></pre>
+
+<p>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=720px, height=1280px" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>semperhhhの博客</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- 首页 -->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/buttons.css">
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/list-navi.css">
+    <script src="../js/list-navi.js"></script>
+</head>
+
+<body class="main_index">
+    <div class="box">
+        {{{navigationBar}}} 
+
+        <!-- list -->
+        <div class="list-background container-fluid">
+            <div style="height:80px;"></div>
+            <div class="content">
+                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+
+                <!-- 分区导航 -->
+                <div class="col-md-3 navi navi-window">
+                    <ul>
+                        <li>
+                            <button class="button button-glow button-rounded button-raised button-primary" onclick="jishuAction()">技术乱写</button>
+                        </li>
+                        <li>
+                            <button class="button button-glow button-rounded button-raised button-primary" onclick="richangAction()">日常瞎记</button>
+                        </li>
+                        <li>
+                            <button class="button button-glow button-rounded button-raised button-primary" onclick="pingshiAction()">平时幻想</button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 列表 -->
+                <div class="col-md-8 list">
+                        {{#lists}}
+                    <div class="col-md-12 corner-window cell" onclick="location='{{WEBSITE_HOST}}/posts/{{POSTS_TITLE}}'">
+                        <div class="col-md-12" style="height:16px;"></div>
+                        <div class="col-md-12">
+                            <p class="title">{{POSTS_TITLE}}</p>
+                            <p>
+                                <i>创建于 :{{POSTS_CREATE_TIME}}</i>
+                            </p>
+                            <p>
+                                {{#POSTS_TAG}}
+                                <span class="badge badge-success">{{POSTS_TAG_NAME}}</span>
+                                 {{/POSTS_TAG}}   
+                            </p>
+                            <p>
+                                <i>喜欢 : {{POSTS_LIKEED}}</i>
+                                <i>&nbsp;&nbsp;&nbsp;</i>
+                                <i>阅读 : {{POSTS_READED}}</i>
+                            </p>
+                        </div>
+                        <div class="col-md-12" style="height:16px;"></div>
+                    </div>
+                    <div class="col-md-12" style="height:16px;"></div>
+                    {{/lists}}
+                    <div style="height:80px;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

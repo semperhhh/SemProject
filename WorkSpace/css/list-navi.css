@@ -1,0 +1,49 @@
+/* 列表导航css */
+
+/* 列表字体 */
+p.title {
+    font-size: 22px;
+    font-weight: 600;
+}
+p.subTitle {
+    font-size:14px;
+    font-weight: 400;
+}
+/* 块 */
+.content {
+
+}
+
+@media screen and (min-width:800px) {
+    
+    /* 分区导航 */
+    .navi {
+        float: left;
+        position: fixed;
+        width: 220px;
+    }
+    .navi li {
+        padding-top: 15px;
+        margin-left: -20px;
+        height: 50px;
+    }
+}
+@media screen and (max-width:799px) {
+    .navi {
+        display: inline;
+    }
+    .navi li {
+        display: inline;
+        padding-top: 15px;
+    }
+}
+
+div.navi-window {
+    border-radius: 10px;
+    background: rgba(10, 10, 10, 0.7);
+}
+
+/* 列表 */
+.list {
+    margin-left: 220px;
+}

@@ -1,0 +1,86 @@
+<p>pid: 190115;
+tag: iOS;</p>
+
+<hr>
+
+<h1>iOS-认识锁</h1>
+
+<blockquote>
+<p>认识开发中常见的锁及作用</p>
+</blockquote>
+
+<p>首先一些概念定义:<br>
+临界区:指的是一块对公共资源进行访问的代码.  </p>
+
+<p>互斥锁:是一种用于多线程编程中,防止两条线程同时对同一公共资源进行读写的机制.该目的通过将代码切片成一个一个的临界区而达成. &lt;!--more--&gt;<br>
+自旋锁:是用于多线程同步的一种锁,线程反复检查锁变量是否可用.<br>
+条件锁:就是条件变量,当进程的某些资源要求不满足时就进入休眠,也就是锁住了.当资源被分配到了,条件锁打开,进程继续运行.<br>
+读写锁:用于解决多线程对公共资源读写问题.读操作可并发重入,写操作是互斥的.读写锁通常用互斥锁,条件变量,信号量实现.<br>
+信号量:是一种更高级的同步机制.信号量可以有更多的取值空间,用来实现更加复杂的同步,而不单单是线程间互斥.  </p>
+
+<h3>互斥锁</h3>
+
+<blockquote>
+<p>互斥锁的实现原理与信号量非常相似,不是使用忙等,而是阻塞线程并睡眠,需要进行上下文切换</p>
+</blockquote>
+
+<h4>NSLock</h4>
+
+<h4>pthread_mutex</h4>
+
+<h4>@synchronized</h4>
+
+<p>这其实是一个 OC 层面的锁， 主要是通过牺牲性能换来语法上的简洁与可读.<br>
+我们知道 @synchronized 后面需要紧跟一个 OC 对象，它实际上是把这个对象当做锁来使用。这是通过一个哈希表来实现的，OC 在底层使用了一个互斥锁的数组(你可以理解为锁池)，通过对对象去哈希值来得到对应的互斥锁.<br>
+你调用 sychronized 的每个对象，Objective-C runtime 都会为其分配一个递归锁并存储在哈希表中.<br>
+具体的实现原理可以参考这篇文章: <a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/">关于 @synchronized，这儿比你想知道的还要多</a>;  </p>
+
+<h3>自旋锁</h3>
+
+<blockquote>
+<p>自旋锁是为了确保临界区只有一个线程可以访问</p>
+</blockquote>
+
+<h4>OSSpinLock(iOS10后不再使用)</h4>
+
+<h4>os<em>unfair</em>lock(iOS10后用来替换OSSpinLock)</h4>
+
+<h3>读写锁</h3>
+
+<h4>pthread_rwlock</h4>
+
+<h3>递归锁</h3>
+
+<h4>NSRecursiveLock</h4>
+
+<h4>pthread_mutex(recursive)</h4>
+
+<h3>条件锁</h3>
+
+<h4>NSCondition</h4>
+
+<p>NSCondition 的底层是通过条件变量(condition variable)pthread<em>cond</em>t 来实现的。条件变量有点像信号量，提供了线程阻塞与信号机制，因此可以用来阻塞某个线程，并等待某个数据就绪，随后唤醒线程.</p>
+
+<h4>NSConditionLock</h4>
+
+<h3>信号量</h3>
+
+<h4>dispatch_semaphore</h4>
+
+<h2>自旋锁和互斥锁的对比</h2>
+
+<p>相同点:都能保证同一时间只有一个线程访问共享资源.都能保证线程安全.<br>
+不同点:<br>
+    互斥锁:如果共享数据已经有其他线程加锁了,线程会进入休眠状态等待锁.一旦被访问的资源被解锁,则等待资源的线程会被唤醒.<br>
+    自旋锁:如果共享数据已经有其他线程加锁了,线程会以死循环的方式等待锁,一旦被访问的资源被解锁,则等待资源的线程会立即执行.<br>
+自旋锁的效率高于互斥锁.</p>
+
+<p>两种锁的加锁原理：<br>
+互斥锁：线程会从sleep（加锁）——&gt;running（解锁），过程中有上下文的切换(主动出让时间片，线程休眠，等待下一次唤醒)，cpu的抢占，信号的发送等开销。<br>
+自旋锁：线程一直是running(加锁——&gt;解锁)，死循环（忙等 do-while）检测锁的标志位，机制不复杂。  </p>
+
+<h3>最后</h3>
+
+<p>本文一些内容参考了:<br>
+<a href="https://juejin.im/post/57f6e9f85bbb50005b126e5f">深入理解 iOS 开发中的锁</a>;<br>
+<a href="http://yulingtianxia.com/blog/2015/11/01/More-than-you-want-to-know-about-synchronized/">关于 @synchronized，这儿比你想知道的还要多</a>;<br>

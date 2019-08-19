@@ -1,0 +1,81 @@
+
+body.main_index {
+    background: url(../images/background.jpg);
+    /* background-color: black; */
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+div.box {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+}
+img.head{
+	width: 128px;
+	height: 128px;
+	min-height: 128px;
+	max-height: 128px;
+}
+.img-circle{
+    border-radius: 50%;
+}
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.shadow {
+    box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.9);
+}
+div.corner-window {
+    border-radius: 10px;
+    background: rgba(200, 200, 200, 0.8);
+}
+div.cell {
+    cursor: pointer;
+}
+div.cell:hover {
+    background: rgba(200, 200, 200, 0.6);
+}
+/* 导航栏 start*/
+.naviBtn {
+    float: right;
+    margin-right: 15px;
+}
+.naviHeight {
+    line-height: 1.5;
+}
+/* navi end */
+div.col-center {
+    float:none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    border-radius: 8px;
+    width: 600px;
+    height: 500px;
+}
+
+div.postsBackground {
+    background-color: white;
+}
+
+h3 {
+    color: green;
+}
+
+h4 {
+    color: blue;
+}
+
+.l-center {
+    text-align: center;   
+}
+
+.span-1 {
+    color:black;
+    font-weight: 800;
+}

@@ -1,0 +1,36 @@
+<hr>
+
+<h1>iOS-isa指针</h1>
+
+<h3>Objective-c中的isa指针</h3>
+
+<blockquote>
+<p>在Objective-c中,任何类的定义都是对象.类和类的实例对象没有任何本质区别.任何对象都有isa指针.</p>
+</blockquote>
+
+<p>isa指针对于消息分发机制和Cocoa对象的动态能力来说是很关键的.</p>
+
+<p>isa指针类型的数据结构可以在Objc.h中看到:&lt;!--more--&gt;
+<img src="http://olnx80yq4.bkt.clouddn.com/iOS-isa%E6%8C%87%E9%92%88-1.png" alt="图片1">
+<img src="http://olnx80yq4.bkt.clouddn.com/iOS-isa%E6%8C%87%E9%92%88-2.png" alt="图片2">
+可以看到isa是一个class类型的指针,它指向对象的类,在这个结构体里还有一个isa指针,又是一重指向.这里的isa指针指向的是元类对象.它用来存储类的版本,名字,类方法等信息.所有的元类对都指向NSObject的元类对象,所以最终还是NSObject.一共有三次指向:类对象-&gt;元类对象-&gt;NSObject元类对象.</p>
+
+<blockquote>
+<p>注意的是:元类(meteclass)也是类,它也是对象.元类保存了类方法的列表.当类方法被调用时,先会从本身查找类方法的实现,如果没有,元类会向他父类查找该方法.</p>
+</blockquote>
+
+<p>第二个成员变量&quot;super_class&quot;指向父类的类对象.</p>
+
+<p><em>每一个对象本质上都是一个类的实例.其中类定义了成员变量和成员方法的列表.对象通过对象的isa指针指向类</em></p>
+
+<h3>isa指针的应用</h3>
+
+<p>isa指针常见于runtime的应用:
+1.动态创建一个类.
+2.动态地为某个类添加属性\方法,修改属性值\方法.(前面学习过的关联对象).
+3.遍历一个类的所有成员变量(属性)\所有方法.</p>
+
+<h3>isa指针经典的图片介绍</h3>
+
+<p><img src="https://blog-1256512148.cos.ap-beijing.myqcloud.com/blog-isa01.png" width=600 align=center>
+loud.com/blog-isa01.png" width=600 align=center>
