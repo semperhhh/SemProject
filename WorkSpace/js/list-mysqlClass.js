@@ -8,18 +8,31 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+//查询-列表
 function queryLists(callback) {
-
-    console.log("queryLists");
 
     connection.query("select * from postslist", function (error, results, fields) {
         if (error) {
             throw error;
         }
-        
         callback(results);
-        // return results;
     });
 }
 
-module.exports = queryLists;
+//查询-文章标题
+function queryPosts(title, callback) {
+
+    var sqlStr = "select * from postslist where title = ?";
+    var sqlParam = [title];
+    connection.query(sqlStr, sqlParam, function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
+        callback(results);
+    });
+}
+
+module.exports = {
+    queryLists: queryLists,
+    queryPosts: queryPosts
+}

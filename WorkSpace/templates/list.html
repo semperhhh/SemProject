@@ -131,20 +131,20 @@
         methods: {
             //点击了列表
             list_action(titleStr) {
-                window.location.href = "/posts" + titleStr;
+                window.location.href = "/posts?title=" + titleStr;
             },
 
             getList() {
                 var _this = this;
                 console.log("ajax加载列表");    
-                $.get("/listsQuery", {
+                $.get("/lists/query", {
                     page: 1,//页数
                 }).done(function (data) {
                     console.log(data);
                     _this.POSTS_LISTS = data;
                 }).fail(function(response, status) {
                     console.log(response.status, status);
-                }).always(function(){
+                }).always(function() {
                     console.log("请求完成");
                 });
             },

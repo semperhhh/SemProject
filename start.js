@@ -5,9 +5,7 @@ var app = express();
 var workSpacePath = "/WorkSpace";
 var templatePath = "/templates";
 
-var queryLists = require("./WorkSpace/js/list-mysqlClass")
-
-var ejs = require("ejs");
+var mysqlClass = require("./WorkSpace/js/list-mysqlClass")//数据库类
 
 //首页
 app.get("/", function (request, response) {
@@ -18,14 +16,15 @@ app.get("/", function (request, response) {
 //列表界面
 app.get("/lists", function (request, response) {
     console.log("/lists");
-
     response.sendfile(__dirname + workSpacePath + templatePath + "/list.html");
 });
 
 //列表内容
-app.get("/listsQuery", function (request, response) {
+app.get("/lists/query", function (request, response) {
 
-    queryLists(function (lists) {
+    console.log("/lists/query");
+
+    mysqlClass.queryLists(function (lists) {
 
         var nmLists = [];
 
@@ -77,6 +76,16 @@ app.get("/posts", function (request, response) {
     response.sendfile(__dirname + workSpacePath + templatePath + "/posts.html");
 })
 
+//文章内容
+app.get("/posts/query", function (request, respose) {
+    console.log("/posts/query");
+    var params = request.query;
+    console.log(params);
+    var title = params["title"];
+    respose.send("文章内容");
+})
+
+//关于
 app.get("/about", function (request, response) {
     console.log("/about");
     response.sendfile(__dirname + workSpacePath + templatePath + "/about.html");
