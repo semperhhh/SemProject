@@ -28,7 +28,8 @@
             <div class="col-md-9 postsBackground center-block">
                 <div style="height:60px;"></div>
 
-                {{POSTS_CONTENT}}
+                <!-- 内容 -->
+                <div v-html="POSTS_CONTENT"></div>
 
                 <div style="height:60px;"></div>
                 <!-- 分割线 -->
@@ -68,14 +69,15 @@
                 $.ajax({
                     url: "/posts/query",
                     data: {
-                        title: _this.POSTS_TITLE,
+                        title: encodeURI(_this.POSTS_TITLE),
                     },
+                    method: "GET",
                     success:function (data) {
                         console.log("请求成功");
                         _this.POSTS_CONTENT = data;
                     },
                 }).fail(function (error, response) {
-                    console.log(error, response.codeStatus);
+                    console.log("posts error" + error, response.codeStatus);
                 }).always(function () {
                     console.log("请求完成");
                 });

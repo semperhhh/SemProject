@@ -7,6 +7,9 @@ var templatePath = "/templates";
 
 var mysqlClass = require("./WorkSpace/js/list-mysqlClass")//数据库类
 
+var marked = require("marked");//markdowm转html
+var fs = require("fs");//文件
+
 //首页
 app.get("/", function (request, response) {
     console.log("/home");
@@ -66,7 +69,7 @@ app.get("/lists/query", function (request, response) {
 
             nmLists.push(nmDict);
         }
-        response.json(nmLists);
+        response.json(nmLists.reverse());
     });
 })
 
@@ -79,10 +82,20 @@ app.get("/posts", function (request, response) {
 //文章内容
 app.get("/posts/query", function (request, respose) {
     console.log("/posts/query");
+    var url = request.originalUrl;
     var params = request.query;
-    console.log(params);
-    var title = params["title"];
-    respose.send("文章内容");
+    var title = decodeURI(params["title"]);
+    console.log("文章标题 title = ", url, title);
+
+    //读取md文件 转html
+    fs.readFile(__dirname + workSpacePath + templatePath +"/static/" + title + ".md", function (error, data) {
+        if (error) {
+            console.log("error");
+            return;
+        }else {
+            respose.send(marked(data.toString()));
+        }
+    })
 })
 
 //关于
