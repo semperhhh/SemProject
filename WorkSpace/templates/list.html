@@ -16,11 +16,16 @@
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/list-navi.css">
     <script src="../js/list-navi.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery.min.js"></script>
 </head>
 
 <body class="main_index">
-    <div class="box">
-        {{{navigationBar}}} 
+    <div class="box" id="main_list">
+
+        <!-- {{{navigationBar}}}  -->
+
+        <navigation-bar></navigation-bar>
 
         <!-- list -->
         <div class="list-background container-fluid">
@@ -32,46 +37,123 @@
                 <div class="col-md-3 navi navi-window">
                     <ul>
                         <li>
-                            <button class="button button-glow button-rounded button-raised button-primary" onclick="jishuAction()">技术乱写</button>
+                            <button class="button button-glow button-rounded button-raised button-primary"
+                                onclick="jishuAction()">技术乱写</button>
                         </li>
                         <li>
-                            <button class="button button-glow button-rounded button-raised button-primary" onclick="richangAction()">日常瞎记</button>
+                            <button class="button button-glow button-rounded button-raised button-primary"
+                                onclick="richangAction()">日常瞎记</button>
                         </li>
                         <li>
-                            <button class="button button-glow button-rounded button-raised button-primary" onclick="pingshiAction()">平时幻想</button>
+                            <button class="button button-glow button-rounded button-raised button-primary"
+                                onclick="pingshiAction()">平时幻想</button>
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- 列表 -->
-                <div class="col-md-8 list">
-                        {{#lists}}
-                    <div class="col-md-12 corner-window cell" onclick="location='{{WEBSITE_HOST}}/posts/{{POSTS_TITLE}}'">
+                <div class="col-md-8 list" v-for="cell in POSTS_LISTS">
+                    <div class="col-md-12 corner-window cell" @click="list_action(cell.POSTS_TITLE)">
                         <div class="col-md-12" style="height:16px;"></div>
                         <div class="col-md-12">
-                            <p class="title">{{POSTS_TITLE}}</p>
+                            <p class="title">{{cell.POSTS_TITLE}}</p>
                             <p>
-                                <i>创建于 :{{POSTS_CREATE_TIME}}</i>
+                                <i>创建于 :{{cell.POSTS_CREATE_TIME}}</i>
                             </p>
                             <p>
-                                {{#POSTS_TAG}}
-                                <span class="badge badge-success">{{POSTS_TAG_NAME}}</span>
-                                 {{/POSTS_TAG}}   
+                                <i>最后更新 :{{cell.POSTS_UPDATA_TIME}}</i>
+                            </p>
+                            <p class="list_posts_tag" v-for="item in cell.POSTS_TAG">
+                                <span class="badge badge-success">
+                                    {{item}}
+                                </span>
                             </p>
                             <p>
-                                <i>喜欢 : {{POSTS_LIKEED}}</i>
+                                <i>喜欢 : {{cell.POSTS_LIKEED}}</i>
                                 <i>&nbsp;&nbsp;&nbsp;</i>
-                                <i>阅读 : {{POSTS_READED}}</i>
+                                <i>阅读 : {{cell.POSTS_READED}}</i>
                             </p>
                         </div>
                         <div class="col-md-12" style="height:16px;"></div>
                     </div>
                     <div class="col-md-12" style="height:16px;"></div>
-                    {{/lists}}
-                    <div style="height:80px;"></div>
+                </div>
+                <div style="height:80px;"></div>
             </div>
         </div>
     </div>
 </body>
+<script>
+
+    //导航栏
+    Vue.component('navigation-bar', {
+        template: `
+                <nav class="navbar navbar-dark bg-dark naviHeight">
+            <a class="navbar-brand" href="/">semperhhhの博客</a>
+            <div>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item naviBtn">
+                        <button class="button button-box button-longshadow-right" onclick="location='/'">
+                            <i class="fa fa-home"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item naviBtn">
+                        <button class="button button-box button-longshadow-right" onclick="location='/lists'">
+                            <i class="fa fa-list"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item naviBtn">
+                        <button class="button button-box button-longshadow-right" onclick="location='/about'">
+                            <i class="fa fa-user"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        `
+    })
+
+    new Vue({
+        el: "#main_list",
+        data: {
+            POSTS_LISTS: [{
+                    POSTS_TITLE: "标题",
+                    POSTS_CREATE_TIME: "创建时间",
+                    POSTS_UPDATA_TIME: "最后更新时间",
+                    POSTS_LIKEED: "0",
+                    POSTS_READED: "0",
+                    POSTS_TAG: [
+                        "123"
+                    ]
+                }
+            ]
+        },
+        methods: {
+            //点击了列表
+            list_action(titleStr) {
+                window.location.href = "/posts" + titleStr;
+            },
+
+            getList() {
+                var _this = this;
+                console.log("ajax加载列表");    
+                $.get("/listsQuery", {
+                    page: 1,//页数
+                }).done(function (data) {
+                    console.log(data);
+                    _this.POSTS_LISTS = data;
+                }).fail(function(response, status) {
+                    console.log(response.status, status);
+                }).always(function(){
+                    console.log("请求完成");
+                });
+            },
+        },
+        mounted: function() {//安装
+            console.log("安装");
+            this.getList();
+        },
+    })
+</script>
 
 </html>

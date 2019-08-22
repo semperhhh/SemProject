@@ -5,38 +5,30 @@ p.title {
     font-size: 22px;
     font-weight: 600;
 }
+
 p.subTitle {
-    font-size:14px;
+    font-size: 14px;
     font-weight: 400;
 }
+
 /* 块 */
-.content {
+.content {}
 
+
+/* 分区导航 */
+.navi {
+    float: left;
+    position: fixed;
+    width: 240px;
+    margin-left: 20px;
 }
 
-@media screen and (min-width:800px) {
-    
-    /* 分区导航 */
-    .navi {
-        float: left;
-        position: fixed;
-        width: 220px;
-    }
-    .navi li {
-        padding-top: 15px;
-        margin-left: -20px;
-        height: 50px;
-    }
+.navi li {
+    padding-top: 15px;
+    margin-left: -8px;
+    height: 50px;
 }
-@media screen and (max-width:799px) {
-    .navi {
-        display: inline;
-    }
-    .navi li {
-        display: inline;
-        padding-top: 15px;
-    }
-}
+
 
 div.navi-window {
     border-radius: 10px;
@@ -45,5 +37,5 @@ div.navi-window {
 
 /* 列表 */
 .list {
-    margin-left: 220px;
+    margin-left: 280px;
 }
