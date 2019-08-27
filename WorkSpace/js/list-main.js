@@ -3,14 +3,12 @@ new Vue({
     el: "#main_list",
     data: {
         POSTS_LISTS: [{
-            POSTS_TITLE: "标题",
-            POSTS_CREATE_TIME: "创建时间",
-            POSTS_UPDATA_TIME: "最后更新时间",
-            POSTS_LIKEED: "0",
-            POSTS_READED: "0",
-            POSTS_TAG: [
-                "123"
-            ]
+            POSTS_TITLE: "",
+            POSTS_CREATE_TIME: "",
+            POSTS_UPDATA_TIME: "",
+            POSTS_LIKEED: "",
+            POSTS_READED: "",
+            POSTS_TAG: [],
         }]
     },
     methods: {

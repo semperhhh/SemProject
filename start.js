@@ -106,4 +106,4 @@ app.get("/about", function (request, response) {
 
 app.use(express.static(path.join(__dirname  + workSpacePath)));//指定静态文件目录
 
-app.listen(8181);
+app.listen(8484);
