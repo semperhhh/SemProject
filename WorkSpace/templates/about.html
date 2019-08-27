@@ -19,23 +19,28 @@
             color: white;
         }
     </style>
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/navigationBar.js"></script>
 </head>
 
 <body class="main_index">
-    <div class="box">
-        {{{navigationBar}}}
+    <div class="box" id="main_about">
+
+        <navigation-bar></navigation-bar>
 
         <div class="list-background">
+
             <div style="height:80px;"></div>
             <div class="container">
-
                 <div class="row">
                     <div class="col corner-window">
                         <div style="height:20px;"></div>
                         <p>iOS开发、前端入门程序员</p>
                         <p>技术栈基本都是前端</p>
                         <p>希望JavaScript一统天下吧哈哈哈</p>
-                        <p><img src="https://img.shields.io/badge/language-Swift4.2-yellow.svg">
+                        <p>
+                            <img src="https://img.shields.io/badge/language-Swift4.2-yellow.svg">
                             <img src="https://img.shields.io/badge/language-Objective--c-orange.svg">
                         </p>
                         <div style="height:20px;"></div>
@@ -54,7 +59,7 @@
                 <div style="height: 30px"></div>
 
                 <div class="row">
-                    <div class="col corner-window cell" onclick="location='https://github.com/semperhhh'">
+                    <div class="col corner-window cell" @click="githubAction()">
                         <div style="height:20px;"></div>
                         <p>GitHub</p>
                         <p>佛系demo开发</p>
@@ -62,7 +67,7 @@
                     </div>
                     <div style="width: 20px;"></div>
                     <div class="col corner-window cell"
-                        onclick="location='https://juejin.im/user/58ff25b65c497d00581169f5'">
+                        @click="juejinAction()">
                         <div style="height:20px;"></div>
                         <p>掘金</p>
                         <p>没有能够上台面的分享</p>
@@ -79,7 +84,7 @@
                         <div style="height:20px;"></div>
                     </div>
                     <div style="width: 20px;"></div>
-                    <div class="col corner-window cell" onclick="location='http://weibo.com/semperhhh'">
+                    <div class="col corner-window cell" @click="weiboAction()">
                         <div style="height:20px;"></div>
                         <p>微博</p>
                         <p>心灵鸡汤博主</p>
@@ -104,9 +109,26 @@
                     </div>
                 </div>
             </div>
+            <div style="height:80px;"></div>
         </div>
     </div>
     </div>
 </body>
+<script>
+    new Vue({
+        el: "#main_about",
+        methods: {
+            githubAction() {
+                window.location.href = 'https://github.com/semperhhh';
+            },
+            juejinAction() {
+                window.location.href = 'https://juejin.im/user/,58ff25b65c497d00581169f5';
+            },
+            weiboAction() {
+                window.location.href = 'http://weibo.com/semperhhh';
+            },
+        }
+    })
+</script>
 
 </html>

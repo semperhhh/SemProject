@@ -15,9 +15,9 @@
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/list-navi.css">
-    <script src="../js/list-navi.js"></script>
     <script src="../js/vue.js"></script>
     <script src="../js/jquery.min.js"></script>
+    <script src="../js/navigationBar.js"></script>
 </head>
 
 <body class="main_index">
@@ -38,15 +38,15 @@
                     <ul>
                         <li>
                             <button class="button button-glow button-rounded button-raised button-primary"
-                                onclick="jishuAction()">技术乱写</button>
+                                @click="jishuAction()">工作</button>
                         </li>
                         <li>
                             <button class="button button-glow button-rounded button-raised button-primary"
-                                onclick="richangAction()">日常瞎记</button>
+                                @click="richangAction()">日常</button>
                         </li>
                         <li>
                             <button class="button button-glow button-rounded button-raised button-primary"
-                                onclick="pingshiAction()">平时幻想</button>
+                                @click="pingshiAction()">平时</button>
                         </li>
                     </ul>
                 </div>
@@ -83,77 +83,5 @@
         </div>
     </div>
 </body>
-<script>
-
-    //导航栏
-    Vue.component('navigation-bar', {
-        template: `
-                <nav class="navbar navbar-dark bg-dark naviHeight">
-            <a class="navbar-brand" href="/">semperhhhの博客</a>
-            <div>
-                <ul class="nav justify-content-end">
-                    <li class="nav-item naviBtn">
-                        <button class="button button-box button-longshadow-right" onclick="location='/'">
-                            <i class="fa fa-home"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item naviBtn">
-                        <button class="button button-box button-longshadow-right" onclick="location='/lists'">
-                            <i class="fa fa-list"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item naviBtn">
-                        <button class="button button-box button-longshadow-right" onclick="location='/about'">
-                            <i class="fa fa-user"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        `
-    })
-
-    new Vue({
-        el: "#main_list",
-        data: {
-            POSTS_LISTS: [{
-                    POSTS_TITLE: "标题",
-                    POSTS_CREATE_TIME: "创建时间",
-                    POSTS_UPDATA_TIME: "最后更新时间",
-                    POSTS_LIKEED: "0",
-                    POSTS_READED: "0",
-                    POSTS_TAG: [
-                        "123"
-                    ]
-                }
-            ]
-        },
-        methods: {
-            //点击了列表
-            list_action(titleStr) {
-                window.location.href = "/posts?title=" + titleStr;
-            },
-
-            getList() {
-                var _this = this;
-                console.log("ajax加载列表");    
-                $.get("/lists/query", {
-                    page: 1,//页数
-                }).done(function (data) {
-                    console.log(data);
-                    _this.POSTS_LISTS = data;
-                }).fail(function(response, status) {
-                    console.log(response.status, status);
-                }).always(function() {
-                    console.log("请求完成");
-                });
-            },
-        },
-        mounted: function() {//安装
-            console.log("安装");
-            this.getList();
-        },
-    })
-</script>
-
+<script src="../js/list-main.js"></script>
 </html>
