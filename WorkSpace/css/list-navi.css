@@ -39,3 +39,8 @@ div.navi-window {
 .list {
     margin-left: 280px;
 }
+
+/* 页数 */
+.pageCount {
+    text-align: center;
+}

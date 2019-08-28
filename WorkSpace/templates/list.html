@@ -78,6 +78,18 @@
                     </div>
                     <div class="col-md-12" style="height:16px;"></div>
                 </div>
+                <div style="height:40px;"></div>
+                
+                <!-- 页数 -->
+                <div class="pageCount">
+                    <button class="pageCount button button-action button-rounded" @click="beforeAction()" v-if="beforeBtnShow">
+                        上一页
+                    </button>
+                    <button class="pageCount button button-action button-rounded" @click="afterAction()" v-if="afterBtnShow">
+                        下一页
+                    </button>
+                </div>
+
                 <div style="height:80px;"></div>
             </div>
         </div>

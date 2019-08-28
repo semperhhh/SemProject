@@ -8,10 +8,15 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-//查询-列表
-function queryLists(callback) {
-
-    connection.query("select * from postslist", function (error, results, fields) {
+//查询-列表   
+/*
+    page 页数
+*/
+function queryLists(page, callback) {
+    var sqlCount = (page ? page : 0) * 10;//如果没有默认1
+    var sqlStr = "select * from postslist order by id desc limit 10 offset ?";
+    var sqlParam = [sqlCount];
+    connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
             throw error;
         }

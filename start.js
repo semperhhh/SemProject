@@ -24,10 +24,12 @@ app.get("/lists", function (request, response) {
 
 //列表内容
 app.get("/lists/query", function (request, response) {
-
+    
     console.log("/lists/query");
-
-    mysqlClass.queryLists(function (lists) {
+    var params = request.query;
+    var page = params["page"];
+    
+    mysqlClass.queryLists(page ,function (lists) {
 
         var nmLists = [];
 
@@ -69,7 +71,7 @@ app.get("/lists/query", function (request, response) {
 
             nmLists.push(nmDict);
         }
-        response.json(nmLists.reverse());
+        response.json(nmLists);
     });
 })
 
@@ -82,10 +84,9 @@ app.get("/posts", function (request, response) {
 //文章内容
 app.get("/posts/query", function (request, respose) {
     console.log("/posts/query");
-    var url = request.originalUrl;
     var params = request.query;
     var title = decodeURI(params["title"]);
-    console.log("文章标题 title = ", url, title);
+    console.log("文章标题 title = ", title);
 
     //读取md文件 转html
     fs.readFile(__dirname + workSpacePath + templatePath +"/static/" + title + ".md", function (error, data) {
