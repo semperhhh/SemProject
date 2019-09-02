@@ -1,4 +1,3 @@
-
 new Vue({
     el: "#main_list",
     data: {
@@ -8,6 +7,7 @@ new Vue({
             POSTS_UPDATA_TIME: "",
             POSTS_LIKEED: "",
             POSTS_READED: "",
+            POSTS_CATEGORY: "",
             POSTS_TAG: [],
         }],
         page: 0,
@@ -21,27 +21,31 @@ new Vue({
         },
 
         //加载列表
-        getList() {
+        getList(isAfterAction) {
             var _this = this;
             console.log("ajax加载列表");
             $.get("/lists/query", {
                 page: _this.page, //页数
+                category: _this.category, //分类
             }).done(function (data) {
+
                 console.log(data);
 
                 var lists = data;
 
-                if (lists.length == 0) {
-                    alert("已经是最后一页");
-                    _this.afterBtnShow = false;
-                    _this.page -= 1;
-                    return;
-                }else {
-                    _this.afterBtnShow = true;
-                }
+                if (isAfterAction) {
 
-                _this.POSTS_LISTS = lists;
-                
+                    if (lists.length == 0) { //是否展示下一页                    
+                        alert("已经是最后一页");
+                        _this.page -= 1;
+                        _this.afterBtnShow = false;
+                        return;
+                    } else {
+                        _this.afterBtnShow = true;
+                    }
+                }
+                _this.POSTS_LISTS = lists; //赋值
+
             }).fail(function (response, status) {
                 console.log(response.status, status);
             }).always(function () {
@@ -51,32 +55,44 @@ new Vue({
 
         //工作
         jishuAction() {
-            alert("工作~~模块开发中");
+            this.category = 0;
+            this.getList();
+            this.showButton();
         },
         //日常
         richangAction() {
-            alert("日常~~模块开发中");
+            this.category = 1;
+            this.getList();
+            this.showButton();
         },
         //平时
         pingshiAction() {
-            alert("平时~~模块开发中");
+            this.category = 2;
+            this.getList();
+            this.showButton();
+        },
+
+        //显示翻页按钮
+        showButton() {
+            this.beforeBtnShow = true;
+            this.afterBtnShow = true;
         },
 
         //上一页
         beforeAction() {
             var _this = this;
-            
+
             if (_this.page == 0) {
                 alert("已经是第一页");
                 _this.beforeBtnShow = false;
                 return;
-            }else {
+            } else {
                 _this.beforeBtnShow = true;
             }
 
             _this.page -= 1;
             console.log("点击了上一页 page = ", _this.page);
-            _this.getList();//请求数据
+            _this.getList(); //请求数据
         },
 
         //下一页
@@ -87,7 +103,7 @@ new Vue({
             if (_this.beforeBtnShow == false) {
                 _this.beforeBtnShow = true;
             }
-            _this.getList();
+            _this.getList(true);
         },
     },
     mounted: function () { //安装

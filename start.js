@@ -28,8 +28,9 @@ app.get("/lists/query", function (request, response) {
     console.log("/lists/query");
     var params = request.query;
     var page = params["page"];
+    var category = params["category"];
     
-    mysqlClass.queryLists(page ,function (lists) {
+    mysqlClass.queryLists(page ,category ,function (lists) {
 
         var nmLists = [];
 
@@ -62,11 +63,11 @@ app.get("/lists/query", function (request, response) {
 
             //分类
             if (list.category == 0) {
-                nmDict.POSTS_CATEGORY = "乱写";
+                nmDict.POSTS_CATEGORY = "工作";
             } else if (list.category == 1) {
-                nmDict.POSTS_CATEGORY = "瞎记";
+                nmDict.POSTS_CATEGORY = "日常";
             } else if (list.category == 2) {
-                nmDict.POSTS_CATEGORY = "幻想";
+                nmDict.POSTS_CATEGORY = "平时";
             }
 
             nmLists.push(nmDict);

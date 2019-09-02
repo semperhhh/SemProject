@@ -12,10 +12,17 @@ connection.connect();
 /*
     page 页数
 */
-function queryLists(page, callback) {
+function queryLists(page, category, callback) {
     var sqlCount = (page ? page : 0) * 10;//如果没有默认1
-    var sqlStr = "select * from postslist order by id desc limit 10 offset ?";
-    var sqlParam = [sqlCount];
+
+    var sqlStr, sqlParam;
+    if (category) {
+        sqlStr = 'select * from postslist where category = ? order by id desc limit 10 offset ?';
+        sqlParam = [category, sqlCount];
+    }else {
+        sqlStr = 'select * from postslist order by id desc limit 10 offset ?';
+        sqlParam = [sqlCount];
+    }
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
             throw error;
