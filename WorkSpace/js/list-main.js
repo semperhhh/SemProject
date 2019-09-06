@@ -1,4 +1,4 @@
-new Vue({
+var mainList = new Vue({
     el: "#main_list",
     data: {
         POSTS_LISTS: [{
@@ -45,6 +45,10 @@ new Vue({
                     }
                 }
                 _this.POSTS_LISTS = lists; //赋值
+
+                //滚动
+                var element = document.getElementById("main_list");
+                element.scrollIntoView();
 
             }).fail(function (response, status) {
                 console.log(response.status, status);
