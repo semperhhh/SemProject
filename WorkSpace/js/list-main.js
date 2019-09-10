@@ -22,8 +22,8 @@ var mainList = new Vue({
 
         //加载列表
         getList(isAfterAction) {
-            var _this = this;
             console.log("ajax加载列表");
+            var _this = this;
             $.get("/lists/query", {
                 page: _this.page, //页数
                 category: _this.category, //分类

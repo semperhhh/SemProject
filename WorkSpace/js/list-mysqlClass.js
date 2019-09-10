@@ -6,7 +6,13 @@ var connection = mysql.createConnection({
     database: "blog",
 });
 
-connection.connect();
+connection.connect(function (error) {
+    if (error) {
+        console.log('connect error');
+    }else {
+        console.log('connect success');
+    }
+});
 
 //查询-列表   
 /*
