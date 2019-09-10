@@ -1,18 +1,37 @@
 var mysql = require("mysql");
-var connection = mysql.createConnection({
-    host: "39.96.82.100",
-    user: "root",
-    password: "12345678",
-    database: "blog",
-});
 
-connection.connect(function (error) {
-    if (error) {
-        console.log('connect error');
-    }else {
-        console.log('connect success');
-    }
-});
+var connection;
+
+function handleDisconnect() {
+    
+    connection = mysql.createConnection({
+        host: "39.96.82.100",
+        user: "root",
+        password: "12345678",
+        database: "blog",
+    });
+    
+    connection.connect(function (error) {
+        if (error) {
+            console.log('connect error');
+            setTimeout(handleDisconnect, 2000);
+        }else {
+            console.log('connect success');
+        }
+    });
+    
+    connection.on('error', function (error) {
+        console.log('db error', error);
+        if (error.code === 'PROTOCOL_CONNECTION_LOST') {
+            handleDisconnect();
+        }else {
+            throw error;
+        }
+    });
+}
+
+handleDisconnect();
+
 
 //查询-列表   
 /*
