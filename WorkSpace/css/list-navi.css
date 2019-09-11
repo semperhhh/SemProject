@@ -1,6 +1,10 @@
 /* 列表导航css */
 
 /* 列表字体 */
+ul {
+    list-style-type: none;
+}
+
 p.title {
     font-size: 22px;
     font-weight: 600;
@@ -17,17 +21,14 @@ p.subTitle {
 
 /* 分区导航 */
 .navi {
-    float: left;
-    position: fixed;
-    width: 200px;
-    margin-left: 20px;
+    /* height: 200px; */
+    text-align: center;
 }
 
 .navi li {
-    padding-top: 15px;
     text-align: center;
-    margin-left: -40px;
     height: 50px;
+    display: inline-block;
 }
 
 div.navi-window {
@@ -37,7 +38,7 @@ div.navi-window {
 
 /* 列表 */
 .list {
-    margin-left: 280px;
+    /* margin-left: 280px; */
 }
 
 /* 页数 */

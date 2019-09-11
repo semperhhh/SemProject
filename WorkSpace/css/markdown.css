@@ -223,10 +223,12 @@ h6 {
 }
 h1 {
   font-size: 24px;
+  color: rgba(120, 118, 226, 1.0);
 }
 @media (max-width: 767px) {
   h1 {
     font-size: 20px;
+    color: rgba(120, 118, 226, 1.0);
   }
 }
 h2 {
@@ -239,18 +241,22 @@ h2 {
 }
 h3 {
   font-size: 20px;
+  color: rgba(69, 154, 240, 1.0);
 }
 @media (max-width: 767px) {
   h3 {
     font-size: 16px;
+    color: rgba(69, 154, 240, 1.0);
   }
 }
 h4 {
   font-size: 18px;
+  color: rgba(177, 219, 86, 1.0);
 }
 @media (max-width: 767px) {
   h4 {
     font-size: 14px;
+    color: rgba(177, 219, 86, 1.0);
   }
 }
 h5 {
@@ -300,7 +306,7 @@ hr {
 blockquote {
   padding: 0 15px;
   color: #666;
-  border-left: 4px solid #ddd;
+  border-left: 3px solid rgba(199,93,98,1);
 }
 blockquote cite::before {
   content: "-";

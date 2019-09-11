@@ -29,12 +29,12 @@
 
         <!-- list -->
         <div class="list-background container-fluid">
-            <div style="height:80px;"></div>
+            <div style="height:50px;"></div>
             <div class="content">
                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 
                 <!-- 分区导航 -->
-                <div class="col-md-3 navi navi-window">
+                <div class="col-md-8 navi center-block">
                     <ul>
                         <li>
                             <button class="button button-glow button-rounded button-raised button-primary"
@@ -51,8 +51,10 @@
                     </ul>
                 </div>
 
+                <div style="height:20px;"></div>
+
                 <!-- 列表 -->
-                <div class="col-md-8 list" v-for="cell in POSTS_LISTS">
+                <div class="col-md-8 list center-block" v-for="cell in POSTS_LISTS">
                     <div class="col-md-12 corner-window cell" @click="list_action(cell.POSTS_TITLE)">
                         <div class="col-md-12" style="height:16px;"></div>
                         <div class="col-md-12">
@@ -82,13 +84,15 @@
                     <div class="col-md-12" style="height:16px;"></div>
                 </div>
                 <div style="height:40px;"></div>
-                
+
                 <!-- 页数 -->
                 <div class="pageCount">
-                    <button class="pageCount button button-action button-rounded" @click="beforeAction()" v-if="beforeBtnShow">
+                    <button class="pageCount button button-action button-rounded" @click="beforeAction()"
+                        v-if="beforeBtnShow">
                         上一页
                     </button>
-                    <button class="pageCount button button-action button-rounded" @click="afterAction()" v-if="afterBtnShow">
+                    <button class="pageCount button button-action button-rounded" @click="afterAction()"
+                        v-if="afterBtnShow">
                         下一页
                     </button>
                 </div>
@@ -99,4 +103,5 @@
     </div>
 </body>
 <script src="../js/list-main.js"></script>
+
 </html>

@@ -17,11 +17,14 @@
     <script src="../js/vue.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/tool.js"></script>
+    <script src="../js/navigationBar.js"></script>
 </head>
 
 <body class="main_index">
     <div class="box" id="posts">
+        
         <!-- {{{navigationBar}}} -->
+        <navigation-bar></navigation-bar>
 
         <div class="col-md-12">
             <div style="height:80px;"></div>
@@ -37,16 +40,11 @@
 
                 <div class="l-center">
                     <!-- 点赞 -->
-                    <span class="button-wrap">
-                        <button class="button button-circle button-raised button-primary"
-                            v-on:click="likeClick()">赞</button>
-                    </span>
+                    <button class="button button-glow button-rounded button-caution" v-on:click="likeClick()">赞</button>
                     <!-- 打赏 -->
-                    <span class="button-wrap">
-                        <button class="button button-circle button-raised button-royal"
-                            v-on:click="rewardClick()">赏</button>
-                    </span>
+                    <button class="button button-glow button-rounded button-royal" v-on:click="rewardClick()">赏</button>
                 </div>
+
                 <div style="height:60px;"></div>
             </div>
             <div style="height:80px;"></div>
@@ -55,7 +53,6 @@
 </body>
 
 <script>
-
     var posts = new Vue({
         el: "#posts",
         data: { //数据
@@ -63,7 +60,7 @@
             POSTS_CONTENT: "内容!!",
         },
         methods: { //方法
-            
+
             requestData() { //加载数据
                 var _this = this;
                 $.ajax({
@@ -72,7 +69,7 @@
                         title: encodeURI(_this.POSTS_TITLE),
                     },
                     method: "GET",
-                    success:function (data) {
+                    success: function (data) {
                         console.log("请求成功");
                         _this.POSTS_CONTENT = data;
                     },

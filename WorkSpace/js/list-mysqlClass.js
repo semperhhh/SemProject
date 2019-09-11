@@ -50,7 +50,7 @@ function queryLists(page, category, callback) {
     }
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
-            throw error;
+            handleDisconnect();
         }
         callback(results);
     });
@@ -63,7 +63,7 @@ function queryPosts(title, callback) {
     var sqlParam = [title];
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
-            throw error;
+            handleDisconnect();
         }
         callback(results);
     });
