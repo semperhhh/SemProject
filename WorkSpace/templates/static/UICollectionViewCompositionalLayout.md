@@ -1,5 +1,5 @@
 # UICollectionViewCompositionalLayout
-> 可以用来替代UICollectionViewFlowLayout
+> 可以用来替代UICollectionViewFlowLayout,但是iOS 13版本才能用
 
 在 iOS13 中，苹果发布了新的 UICollectionViewCompositionalLayout API ， 主要包括 NSCollectionLayoutSize ，NSCollectionLayoutItem ， NSCollectionLayoutGroup 和 NSCollectionLayoutSection 四个类的组合，来快速的实现 UICollectionView 自定义布局.
 
@@ -27,3 +27,16 @@
 > 一个单元
 
 用**NSCollectionLayoutSize**决定大小,**contentInsets**决定内凹大小.
+
+
+
+#### NSCollectionLayoutAnchor
+
+
+
+#### NSCollectionLayoutBoundarySupplementaryItem
+
+
+
+#### Nested NSCollectionLayoutGroup
+

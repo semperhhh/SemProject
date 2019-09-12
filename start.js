@@ -15,6 +15,18 @@ var logger = log4js.getLogger();
 logger.level = "debug";
 logger.debug("hello, log4s!");
 
+//定时器
+setInterval(() => {
+    heartbeatCount();
+}, 1000 * 60 * 60);
+
+function heartbeatCount() {
+    
+    mysqlClass.queryHome(function () {
+        console.log('heartbeatCount + 1');
+    });
+}
+
 //首页
 app.get("/", function (request, response) {
     console.log("/home");
@@ -103,6 +115,19 @@ app.get("/posts/query", function (request, respose) {
             respose.send(marked(data.toString()));
         }
     })
+})
+
+//文章喜欢
+app.get("/posts/like", function (request, response) {
+    console.log("/posts/like");
+    var params = request.query;
+    var title = decodeURI(params["title"]);
+    console.log("喜欢 文章标题");
+
+    mysqlClass.queryPostsLike(title, function (result) {
+        
+        console.log(result.message);
+    });
 })
 
 //关于

@@ -82,9 +82,22 @@
 
             likeClick() { //喜欢
                 alert("谢谢你的喜欢~");
-                //发送请求:
-                // request.open("GET", "/posts/likeClick/{{POSTS_TITLE}}");
-                // request.send();
+                
+                //发送请求
+                var _this = this;
+                $.ajax({
+                    url: "/posts/like",
+                    data: {
+                        title: encodeURI(_this.POSTS_TITLE),
+                    },
+                    method: "GET",
+                }).done(function (data) {
+                    console.log("like data = ", data);
+                }).fail(function (error, response) {
+                    console.log("like error" + error, response.codeStatus);
+                }).always(function () {
+                    console.log("like request success");
+                });
             },
 
             rewardClick() { //打赏

@@ -1,56 +1,49 @@
 var mysql = require("mysql");
 
-var connection;
+var connection = mysql.createConnection({
+    host: "39.96.82.100",
+    user: "root",
+    password: "12345678",
+    database: "blog",
+});
 
-function handleDisconnect() {
+connection.connect(function (error) {
+    if (error) {
+        console.log('connect error');
+    } else {
+        console.log('connect success');
+    }
+});
+
+function queryHome(callback) {
     
-    connection = mysql.createConnection({
-        host: "39.96.82.100",
-        user: "root",
-        password: "12345678",
-        database: "blog",
-    });
-    
-    connection.connect(function (error) {
+    var sqlStr = "select * from postslist";
+    connection.query(sqlStr, function (error, results, fields) {
         if (error) {
-            console.log('connect error');
-            setTimeout(handleDisconnect, 2000);
-        }else {
-            console.log('connect success');
-        }
-    });
-    
-    connection.on('error', function (error) {
-        console.log('db error', error);
-        if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-            handleDisconnect();
-        }else {
             throw error;
         }
+        callback();
     });
 }
-
-handleDisconnect();
-
 
 //查询-列表   
 /*
     page 页数
 */
 function queryLists(page, category, callback) {
-    var sqlCount = (page ? page : 0) * 10;//如果没有默认1
+    var sqlCount = (page ? page : 0) * 10; //如果没有默认1
 
     var sqlStr, sqlParam;
     if (category) {
         sqlStr = 'select * from postslist where category = ? order by id desc limit 10 offset ?';
         sqlParam = [category, sqlCount];
-    }else {
+    } else {
         sqlStr = 'select * from postslist order by id desc limit 10 offset ?';
         sqlParam = [sqlCount];
     }
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
-            handleDisconnect();
+            throw error;
         }
         callback(results);
     });
@@ -63,13 +56,39 @@ function queryPosts(title, callback) {
     var sqlParam = [title];
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
-            handleDisconnect();
+            throw error;
         }
         callback(results);
     });
 }
 
+//查询-文章喜欢
+function queryPostsLike(title, callback) {
+
+    var sqlStr = "select likeed from postslist where title = ?";
+    var sqlParam = [title];
+    connection.query(sqlStr, sqlParam, function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
+
+        var obj = results[0];//数据
+
+        var sqlStr1 = "update postslist set likeed = ? where title = ?";
+        var sqlParam1 = [obj.likeed + 1, title];
+
+        connection.query(sqlStr1, sqlParam1, function (error1, results1, fields1) {
+            if (error1) {
+                throw error;
+            }
+            callback(results1);
+        })
+    });
+}
+
 module.exports = {
+    queryHome: queryHome,
     queryLists: queryLists,
-    queryPosts: queryPosts
+    queryPosts: queryPosts,
+    queryPostsLike: queryPostsLike,
 }

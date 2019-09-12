@@ -21,14 +21,20 @@ p.subTitle {
 
 /* 分区导航 */
 .navi {
-    /* height: 200px; */
     text-align: center;
+}
+
+.navi-button {
+    height: 80px;
+    width: 88%;
+    /* font-size: 1.2em; */
+    font-size: 3vw;
 }
 
 .navi li {
     text-align: center;
-    height: 50px;
     display: inline-block;
+    width: 30%;
 }
 
 div.navi-window {
