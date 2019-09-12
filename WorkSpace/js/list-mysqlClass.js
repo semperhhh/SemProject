@@ -15,6 +15,7 @@ connection.connect(function (error) {
     }
 });
 
+/// 心跳包
 function queryHome(callback) {
     
     var sqlStr = "select * from postslist";
@@ -79,7 +80,28 @@ function queryPostsLike(title, callback) {
 
         connection.query(sqlStr1, sqlParam1, function (error1, results1, fields1) {
             if (error1) {
-                throw error;
+                throw error1;
+            }
+            callback(results1);
+        })
+    });
+}
+
+///文章阅读
+function queryPostsRead(title, callback) {
+    var sqlStr = 'select readed from postslist where title = ?';
+    var sqlParam = [title];
+    connection.query(sqlStr, sqlParam, function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
+
+        var obj = results[0];
+        var sqlStr1 = 'update postslist set readed = ? where title = ?';
+        var sqlParam1 = [obj.readed + 1, title];
+        connection.query(sqlStr1, sqlParam1, function (error1, results1, fields1) {
+            if (error1) {
+                throw error1;
             }
             callback(results1);
         })
@@ -91,4 +113,5 @@ module.exports = {
     queryLists: queryLists,
     queryPosts: queryPosts,
     queryPostsLike: queryPostsLike,
+    queryPostsRead: queryPostsRead,
 }

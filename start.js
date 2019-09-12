@@ -21,7 +21,7 @@ setInterval(() => {
 }, 1000 * 60 * 60);
 
 function heartbeatCount() {
-    
+
     mysqlClass.queryHome(function () {
         console.log('heartbeatCount + 1');
     });
@@ -114,18 +114,21 @@ app.get("/posts/query", function (request, respose) {
         } else {
             respose.send(marked(data.toString()));
         }
-    })
+    });
+
+        //阅读 + 1
+        mysqlClass.queryPostsRead(title, function (result) {
+            console.log("result.message - ", result.message);
+        });
 })
 
 //文章喜欢
 app.get("/posts/like", function (request, response) {
-    console.log("/posts/like");
     var params = request.query;
     var title = decodeURI(params["title"]);
-    console.log("喜欢 文章标题");
+    console.log("/posts/like title = ", title);
 
     mysqlClass.queryPostsLike(title, function (result) {
-        
         console.log(result.message);
     });
 })
