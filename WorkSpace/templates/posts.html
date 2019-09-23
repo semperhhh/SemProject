@@ -12,17 +12,20 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/buttons.css">
     <link rel="stylesheet" href="../css/markdown.css">
+    <link rel="stylesheet" href="../css/posts.css">
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <script src="../js/vue.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/tool.js"></script>
     <script src="../js/navigationBar.js"></script>
+    <script src="../js/posts.js"></script>
 </head>
 
 <body class="main_index">
+
     <div class="box" id="posts">
-        
+
         <!-- {{{navigationBar}}} -->
         <navigation-bar></navigation-bar>
 
@@ -82,7 +85,7 @@
 
             likeClick() { //喜欢
                 alert("谢谢你的喜欢~");
-                
+
                 //发送请求
                 var _this = this;
                 $.ajax({

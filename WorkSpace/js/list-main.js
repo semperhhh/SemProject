@@ -62,18 +62,21 @@ var mainList = new Vue({
             this.category = 0;
             this.getList();
             this.showButton();
+            this.page = 0;
         },
         //日常
         richangAction() {
             this.category = 1;
             this.getList();
             this.showButton();
+            this.page = 0;
         },
         //平时
         pingshiAction() {
             this.category = 2;
             this.getList();
             this.showButton();
+            this.page = 0;
         },
 
         //显示翻页按钮
@@ -92,6 +95,10 @@ var mainList = new Vue({
                 return;
             } else {
                 _this.beforeBtnShow = true;
+
+                if (_this.afterBtnShow == false) {
+                    _this.afterBtnShow = true;
+                }
             }
 
             _this.page -= 1;
