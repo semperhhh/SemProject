@@ -13,6 +13,20 @@ var mainList = new Vue({
         page: 0,
         beforeBtnShow: true,
         afterBtnShow: true,
+        CATEGORY_NAME_LIST: [
+            {
+                category_name: "工作",
+                category_id: 0,
+            },
+            {
+                category_name: "日常",
+                category_id: 1,
+            },
+            {
+                category_name: "平时",
+                category_id: 2,
+            },
+        ],
     },
     methods: {
         //点击了列表
@@ -57,6 +71,17 @@ var mainList = new Vue({
             });
         },
 
+        //点击
+        categoryAction(category_id) {
+
+            if (category_id == 0) {
+                this.jishuAction();
+            }else if (category_id == 1) {
+                this.richangAction();
+            }else if (category_id == 2) {
+                this.pingshiAction();
+            }
+        },
         //工作
         jishuAction() {
             this.category = 0;

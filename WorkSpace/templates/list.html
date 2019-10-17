@@ -33,72 +33,65 @@
                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
 
                 <!-- 分区导航 -->
-                <div class="col-md-8 navi center-block">
+                <div class="col-md-3 navi">
                     <ul>
-                        <li>
-                            <button class="navi-button button-glow button-rounded button-raised button-primary"
-                                @click="jishuAction()">工作</button>
-                        </li>
-                        <li>
-                            <button class="navi-button button-glow button-rounded button-raised button-primary"
-                                @click="richangAction()">日常</button>
-                        </li>
-                        <li>
-                            <button class="navi-button button-glow button-rounded button-raised button-primary"
-                                @click="pingshiAction()">平时</button>
+                        <li v-for="cell in CATEGORY_NAME_LIST">
+                            <div class="navi-button" @click="categoryAction(cell.category_id)">
+                                {{cell.category_name}}
+                                <p class="navi-button-line"></p>
+                            </div>
                         </li>
                     </ul>
                 </div>
+            </div>
 
-                <div style="height:20px;"></div>
-
-                <!-- 列表 -->
-                <div class="col-md-8 list center-block" v-for="cell in POSTS_LISTS">
-                    <div class="col-md-12 corner-window cell" @click="list_action(cell.POSTS_TITLE)">
-                        <div class="col-md-12" style="height:16px;"></div>
-                        <div class="col-md-12">
-                            <p class="title">{{cell.POSTS_TITLE}}</p>
-                            <p>
-                                <i>创建于 :{{cell.POSTS_CREATE_TIME}}</i>
-                            </p>
-                            <p>
-                                <i>最后更新 :{{cell.POSTS_UPDATA_TIME}}</i>
-                            </p>
-                            <p class="list_posts_tag" v-for="item in cell.POSTS_TAG">
-                                <span class="badge badge-success">
-                                    {{item}}
-                                </span>
-                            </p>
-                            <p class="badge badge-info">
-                                {{cell.POSTS_CATEGORY}}
-                            </p>
-                            <p>
-                                <i>喜欢 : {{cell.POSTS_LIKEED}}</i>
-                                <i>&nbsp;&nbsp;&nbsp;</i>
-                                <i>阅读 : {{cell.POSTS_READED}}</i>
-                            </p>
-                        </div>
-                        <div class="col-md-12" style="height:16px;"></div>
+            <!-- 列表 -->
+            <div class="col-md-8 list center-block" v-for="cell in POSTS_LISTS">
+                <div class="col-md-12 corner-window cell" @click="list_action(cell.POSTS_TITLE)">
+                    <div class="col-md-12" style="height:16px;"></div>
+                    <div class="col-md-12">
+                        <p class="title">{{cell.POSTS_TITLE}}</p>
+                        <p>
+                            <i>创建于 :{{cell.POSTS_CREATE_TIME}}</i>
+                        </p>
+                        <p>
+                            <i>最后更新 :{{cell.POSTS_UPDATA_TIME}}</i>
+                        </p>
+                        <p class="list_posts_tag" v-for="item in cell.POSTS_TAG">
+                            <span class="badge badge-success">
+                                {{item}}
+                            </span>
+                        </p>
+                        <p class="badge badge-info">
+                            {{cell.POSTS_CATEGORY}}
+                        </p>
+                        <p>
+                            <i>喜欢 : {{cell.POSTS_LIKEED}}</i>
+                            <i>&nbsp;&nbsp;&nbsp;</i>
+                            <i>阅读 : {{cell.POSTS_READED}}</i>
+                        </p>
                     </div>
                     <div class="col-md-12" style="height:16px;"></div>
                 </div>
-                <div style="height:40px;"></div>
-
-                <!-- 页数 -->
-                <div class="pageCount">
-                    <button class="pageCount button button-action button-rounded" @click="beforeAction()"
-                        v-if="beforeBtnShow">
-                        上一页
-                    </button>
-                    <button class="pageCount button button-action button-rounded" @click="afterAction()"
-                        v-if="afterBtnShow">
-                        下一页
-                    </button>
-                </div>
-
-                <div style="height:80px;"></div>
+                <div class="col-md-12" style="height:16px;"></div>
             </div>
+            <div style="height:40px;"></div>
+
+            <!-- 页数 -->
+            <div class="pageCount">
+                <button class="pageCount button button-action button-rounded" @click="beforeAction()"
+                    v-if="beforeBtnShow">
+                    上一页
+                </button>
+                <button class="pageCount button button-action button-rounded" @click="afterAction()"
+                    v-if="afterBtnShow">
+                    下一页
+                </button>
+            </div>
+
+            <div style="height:80px;"></div>
         </div>
+    </div>
     </div>
 </body>
 <script src="../js/list-main.js"></script>
