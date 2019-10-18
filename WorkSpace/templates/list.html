@@ -38,7 +38,7 @@
                         <li v-for="cell in CATEGORY_NAME_LIST">
                             <div class="navi-button" @click="categoryAction(cell.category_id)">
                                 {{cell.category_name}}
-                                <p class="navi-button-line"></p>
+                                <hr style="background-color: gray;">
                             </div>
                         </li>
                     </ul>
@@ -91,7 +91,6 @@
 
             <div style="height:80px;"></div>
         </div>
-    </div>
     </div>
 </body>
 <script src="../js/list-main.js"></script>

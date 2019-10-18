@@ -24,7 +24,7 @@ p.subTitle {
     .navi {
         text-align: center;
         background-color: white;
-        position: fixed;
+        position: absolute;
         width: 30%;
         border-radius: 5px;
         margin-left: 20px;
@@ -54,12 +54,6 @@ p.subTitle {
 .navi li {
     text-align: left;
     display: inline;
-}
-
-.navi-button-line {
-    background-color: gray;
-    width: 100%;
-    padding-top: 1px;
 }
 
 /* 列表 */

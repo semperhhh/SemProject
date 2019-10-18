@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/> 
+    <meta name="viewport" content="user-scalable=no, width=720px, height=1280px" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>semperhhh | 博客</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -19,39 +19,64 @@
             color: black;
             font-size: 30px;
         }
+
+        .test1234 {
+            position: relative;
+        }
     </style>
 </head>
 
 <body class="main_index">
     <div class="box" id="app">
-        <!-- {{{navigationBar}}}  -->
 
         <div class="col-md-12" style="min-height: 800px;">
             <div class="col-md-12 column">
                 <div style="height:160px;"></div>
                 <div class="col-md-5 col-center" style="width: 600px">
                     <div style="height:80px;"></div>
-                    <img class="head img-circle center-block" src="images/head.jpg">
-                    <p class="text text-center">semperhhh</p>
-                    <p class="text text-center">😢</p>
-                    <hr style="background-color: white"/>
+                    <img class="head img-circle center-block" id="headAnimate" src="images/head.jpg">
+                    <p class="text text-center">semperhh</p>
+                    <hr style="background-color: white" />
                     <h1 class="text-center title">
-                        <button class="button button-3d button-primary button-rounded" v-on:click="list_click">查看文章</button>
+                        <button class="button button-3d button-primary button-rounded"
+                            v-on:click="list_click">查看文章</button>
                         <br>
                     </h1>
+                    <button class="test1234" id="test123" @click="testClick()">test</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-            var app = new Vue ({
-                el: "#app",
-                methods:{
-                    list_click() {
-                        window.location.href = "/lists";
-                    }
+        var app = new Vue({
+            el: "#app",
+            methods: {
+                list_click() {
+                    window.location.href = "/lists";
+                },
+
+                headAnimateBegin() {
+                    var elem = document.getElementById("headAnimate");
+                    var pos = 0;
+
+                    var id = setInterval(() => {
+
+                        console.log("pos = " + pos);
+                        if (pos == 360) {
+                            clearInterval(id);
+                        } else {
+                            pos += 1;
+                            elem.style.transform = "rotate(" + pos + "deg)";
+                        }
+                    }, 10);
+                },
+
+                testClick() {
+                    this.headAnimateBegin();
                 }
-            })
-        </script>
+            }
+        })
+    </script>
 </body>
+
 </html>
