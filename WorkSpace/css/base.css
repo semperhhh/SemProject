@@ -21,8 +21,22 @@ img.head{
 	width: 128px;
 	height: 128px;
 	min-height: 128px;
-	max-height: 128px;
+    max-height: 128px;
+    animation-name: headAnimation;
+    animation-duration: 4s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
+@keyframes headAnimation {
+    from {
+        transform: rotate(-20deg);
+    }
+    to {
+        transform: rotate(380deg);
+    }
+}
+
 .img-circle{
     border-radius: 50%;
     transform-origin: 50% 50%;

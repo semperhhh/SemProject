@@ -42,7 +42,6 @@
                             v-on:click="list_click">查看文章</button>
                         <br>
                     </h1>
-                    <button class="test1234" id="test123" @click="testClick()">test</button>
                 </div>
             </div>
         </div>
@@ -54,26 +53,6 @@
                 list_click() {
                     window.location.href = "/lists";
                 },
-
-                headAnimateBegin() {
-                    var elem = document.getElementById("headAnimate");
-                    var pos = 0;
-
-                    var id = setInterval(() => {
-
-                        console.log("pos = " + pos);
-                        if (pos == 360) {
-                            clearInterval(id);
-                        } else {
-                            pos += 1;
-                            elem.style.transform = "rotate(" + pos + "deg)";
-                        }
-                    }, 10);
-                },
-
-                testClick() {
-                    this.headAnimateBegin();
-                }
             }
         })
     </script>
