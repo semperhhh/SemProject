@@ -1,0 +1,132 @@
+.home-back {
+    background-color: green;
+    height: 88%;
+    width: 100%;
+    /* 绝对位置 */
+    position: absolute;
+    padding-top: 10px;
+}
+
+.home-row {
+    background-color: yellow;
+    height: 100%;
+}
+
+/* 左边 */
+.home-left {
+    background-color: red;
+    width: 25%;
+    margin-left: -10px;
+}
+
+.home-left-headImg {
+    background-color: purple;
+    margin: 80px auto 0px;
+    width: 148px;
+    height: 148px;
+    position: relative;
+}
+
+.head-img-border {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+img.head {
+    width: 76%;
+    height: 76%;
+    position: absolute;
+    margin: 12% auto auto 12%;
+    /* min-height: 128px;
+max-height: 128px; */
+    /* animation-name: headAnimation;
+animation-duration: 4s;
+animation-direction: alternate;
+animation-iteration-count: infinite;
+animation-timing-function: ease-in-out; */
+}
+
+@keyframes headAnimation {
+    from {
+        transform: rotate(-20deg);
+    }
+
+    to {
+        transform: rotate(380deg);
+    }
+}
+
+.img-circle {
+    border-radius: 50%;
+    transform-origin: 50% 50%;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-left-name {
+    margin-top: 20px;
+    background-color: blueviolet;
+    width: 100%;
+    height: 30px;
+    font-size: 22px;
+    font-family: ArialRoundedMTBold;
+    color: rgba(255, 255, 255, 1);
+    line-height: 30px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.home-category-btn {
+    background-color: brown;
+    width: 100%;
+    height: 90px;
+    line-height: 90px;
+    font-size: 16px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(254, 255, 254, 1);
+    padding-left: 27px;
+}
+
+.home-category-btn:hover {
+    cursor: pointer;
+    color: darkgreen;
+}
+
+/* 右边 */
+.home-right {
+    background-color: blue;
+    width: 75%;
+    margin-left: 10px;
+}
+
+.home-right-content {
+    margin: 120px auto auto 70px;
+    width: 80%;
+    height: 80px;
+    font-size: 54px;
+    font-family: HiraKakuStdN-W8, HiraKakuStdN;
+    font-weight: normal;
+    color: rgba(255, 254, 254, 1);
+    line-height: 80px;
+    letter-spacing: 3px;
+    text-shadow: 0px 1px 14px rgba(0, 0, 0, 0.3);
+}
+
+.home-right-yellow {
+    width: 50%;
+    height: 40px;
+    background: rgba(255, 224, 77, 1);
+    margin-left: 70px;
+    margin-top: -35px;
+}

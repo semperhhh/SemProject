@@ -39,6 +39,47 @@ div.cell:hover {
 .naviHeight {
     line-height: 1.5;
 }
+.navbar-bg {
+    background-color: #292F36;
+}
+.navbar-btn {
+    background-color: #292F36;
+}
+
+.navbar-backHome {
+    width: 56px;
+    height: 20px;
+    font-size: 14px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    line-height: 20px;
+}
+
+i {
+    font-style: normal;
+}
+
+.navbar-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar-btn-search {
+    background-color: #0A0A0B;
+    border-radius: 44px;
+    width: 200px;
+}
+
+.navbar-btn-search-title {
+    width: 84px;
+    height: 20px;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(160, 160, 160, 1);
+    line-height: 20px;
+}
 /* navi end */
 div.col-center {
     float:none;

@@ -1,20 +1,24 @@
-<nav class="navbar navbar-dark bg-dark naviHeight">
-    <a class="navbar-brand" href="{{WEBSITE_HOST}}">semperhhhの博客</a>
+<nav class="col-md-10 navbar-center navbar navbar-bg naviHeight">
+    <a class="navbar-title">
+        <img src="images/homeImages/home-navi.png">
+    </a>
     <div>
         <ul class="nav justify-content-end">
+
+            <!-- 搜索 -->
             <li class="nav-item naviBtn">
-                <button class="button button-box button-longshadow-right" onclick="location='{{WEBSITE_HOST}}'">
-                    <i class="fa fa-home"></i>
-                </button>
+                <div class="button navbar-btn-search">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <span class="navbar-btn-search-title">搜索</span>
+                </div>
             </li>
+
+            <!-- 返回首页 -->
             <li class="nav-item naviBtn">
-                <button class="button button-box button-longshadow-right" onclick="location='{{WEBSITE_HOST}}/list'">
-                    <i class="fa fa-list"></i>
+                <button class="button navbar-btn" @click="naviBackBtnClick">
+                    <img src="images/homeImages/home-back@2x.png">
+                    <i class="navbar-backHome">返回首页</i>
                 </button>
-            </li>
-            <li class="nav-item naviBtn">
-                <button class="button button-box button-longshadow-right" onclick="location='{{WEBSITE_HOST}}/about'">
-                    <i class="fa fa-user"></i>
             </li>
         </ul>
     </div>

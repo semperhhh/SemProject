@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/buttons.css">
+    <!-- home -->
+    <link rel="stylesheet" href="css/home.css">
     <!-- 我的 -->
     <link rel="stylesheet" href="css/base.css">
     <script src="./js/jquery.min.js"></script>
@@ -24,179 +26,7 @@
         .test1234 {
             position: relative;
         }
-
-        /* 导航栏 */
-
-        .navbar-btn {
-            background-color: #292F36;
-        }
-
-        .navbar-backHome {
-            width: 56px;
-            height: 20px;
-            font-size: 14px;
-            font-family: PingFangSC-Medium, PingFang SC;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 1);
-            line-height: 20px;
-        }
-
-        i {
-            font-style: normal;
-        }
-
-        .navbar-center {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .navbar-btn-search {
-            background-color: #0A0A0B;
-            border-radius: 44px;
-        }
-
-        .navbar-btn-search-title {
-            width: 84px;
-            height: 20px;
-            font-size: 14px;
-            font-family: PingFangSC-Regular, PingFang SC;
-            font-weight: 400;
-            color: rgba(160, 160, 160, 1);
-            line-height: 20px;
-        }
-
-        .home-back {
-            background-color: green;
-            height: 88%;
-            width: 100%;
-            /* 绝对位置 */
-            position: absolute;
-            padding-top: 10px;
-        }
-
-        .home-row {
-            background-color: yellow;
-            height: 100%;
-        }
-
-        /* 左边 */
-        .home-left {
-            background-color: red;
-            width: 25%;
-            margin-left: -10px;
-        }
-
-        .home-left-headImg {
-            background-color: purple;
-            margin: 80px auto 0px;
-            width: 148px;
-            height: 148px;
-            position: relative;
-        }
-
-        .head-img-border {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-
-        img.head {
-            width: 76%;
-            height: 76%;
-            position: absolute;
-            margin: 12% auto auto 12%;
-            /* min-height: 128px;
-    max-height: 128px; */
-            /* animation-name: headAnimation;
-    animation-duration: 4s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out; */
-        }
-
-        @keyframes headAnimation {
-            from {
-                transform: rotate(-20deg);
-            }
-
-            to {
-                transform: rotate(380deg);
-            }
-        }
-
-        .img-circle {
-            border-radius: 50%;
-            transform-origin: 50% 50%;
-        }
-
-        .center-block {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .home-left-name {
-            margin-top: 20px;
-            background-color: blueviolet;
-            width: 100%;
-            height: 30px;
-            font-size: 22px;
-            font-family: ArialRoundedMTBold;
-            color: rgba(255, 255, 255, 1);
-            line-height: 30px;
-            text-align: center;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        .home-category-btn {
-            background-color: brown;
-            width: 100%;
-            height: 90px;
-            line-height: 90px;
-            font-size: 16px;
-            font-family: PingFangSC-Regular, PingFang SC;
-            font-weight: 400;
-            color: rgba(254, 255, 254, 1);
-            padding-left: 27px;
-        }
-
-        .home-category-btn:hover {
-            cursor: pointer;
-            color: darkgreen;
-        }
-
-        /* 右边 */
-        .home-right {
-            background-color: blue;
-            width: 75%;
-            margin-left: 10px;
-        }
-
-        .home-right-content {
-            margin: 120px auto auto 70px;
-            width: 80%;
-            height: 80px;
-            font-size: 54px;
-            font-family: HiraKakuStdN-W8, HiraKakuStdN;
-            font-weight: normal;
-            color: rgba(255, 254, 254, 1);
-            line-height: 80px;
-            letter-spacing: 3px;
-            text-shadow: 0px 1px 14px rgba(0, 0, 0, 0.3);
-        }
-
-        .home-right-yellow {
-            width: 50%;
-            height: 40px;
-            background: rgba(255, 224, 77, 1);
-            margin-left: 70px;
-            margin-top: -35px;
-        }
+        
     </style>
 </head>
 
@@ -204,32 +34,8 @@
     <div class="box" id="app">
 
         <!-- 导航栏 -->
-        <nav class="col-md-10 navbar-center navbar navbar-dark bg-dark naviHeight">
-            <a class="navbar-title" href="{{WEBSITE_HOST}}">
-                <img src="images/homeImages/home-navi.png">
-            </a>
-            <div>
-                <ul class="nav justify-content-end">
-
-                    <!-- 搜索 -->
-                    <li class="nav-item naviBtn">
-                        <button class="button navbar-btn-search" onclick="location='{{WEBSITE_HOST}}'">
-                            <span class="glyphicon glyphicon-search"></span>
-                            <span class="navbar-btn-search-title">搜索</span>
-                        </button>
-                    </li>
-
-                    <!-- 返回首页 -->
-                    <li class="nav-item naviBtn">
-                        <button class="button navbar-btn" onclick="location='{{WEBSITE_HOST}}'">
-                            <img src="images/homeImages/home-back@2x.png">
-                            <i class="navbar-backHome">返回首页</i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+        <navigation-bar></navigation-bar>
+        
         <div class="home-back">
 
             <div class="row home-row col-md-10 navbar-center no-gutters">
@@ -242,9 +48,9 @@
                     </div>
                     <div class="home-left-name">semperhhhの博客</div>
                     <ul>
-                        <li class="home-category-btn">工作 / work</li>
-                        <li class="home-category-btn">日常 / daily</li>
-                        <li class="home-category-btn">其他 / other</li>
+                        <li v-for="cell in CATEGORY_NAME_LIST" class="home-category-btn" @click="categoryAction(cell.category_id)">
+                            {{cell.category_name}}
+                        </li>
                     </ul>
                 </div>
 
@@ -257,39 +63,11 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 
-
-    <!-- <div class="col-md-12" style="min-height: 800px;">
-            <div class="col-md-12 column">
-                <div style="height:160px;"></div>
-                <div class="col-md-5 col-center" style="width: 600px">
-                    <div style="height:80px;"></div>
-                    <img class="head img-circle center-block" id="headAnimate" src="images/head.jpg">
-                    <p class="text text-center">semperhh</p>
-                    <hr style="background-color: white" />
-                    <h1 class="text-center title">
-                        <button class="button button-3d button-primary button-rounded"
-                            v-on:click="list_click">查看文章</button>
-                        <br>
-                    </h1>
-                </div>
-            </div>
-        </div> -->
-
-    </div>
-    <script>
-        var app = new Vue({
-            el: "#app",
-            methods: {
-                list_click() {
-                    window.location.href = "/lists";
-                },
-            }
-        })
-    </script>
+<!-- 引用script -->
+<script src="./js/home.js"></script>
 </body>
 
 </html>
