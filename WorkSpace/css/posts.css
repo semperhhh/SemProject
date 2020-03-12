@@ -7,3 +7,32 @@
     height: 100%;
     background-color: rgba(200, 0, 250, 0.5);
 }
+
+.postsBackground {
+    background: #2D2E33;
+    opacity: 1.0;
+}
+
+.postsBtn {
+    width: 100px;
+    height: 56px;
+    border-radius:37px;
+    font-size:16px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color:rgba(46,52,59,1);
+    line-height:22px;
+}   
+
+/* 取消点击后的蓝框 */
+.postsBtn:focus {
+    outline: none;
+}
+
+.likeBtn {
+    background:rgba(255,224,77,1);
+}
+
+.moneyBtn {
+    background:rgba(86,255,207,1);
+}

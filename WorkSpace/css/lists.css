@@ -1,0 +1,65 @@
+/* 列表导航css */
+
+/* 列表字体 */
+ul {
+    list-style-type: none;
+}
+
+p.title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-family:PingFangSC-Semibold,PingFang SC;
+    font-weight:600;
+    line-height: 30px;
+}
+
+p.subTitle {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 喜欢 阅读字体 */
+p.like-title {
+    font-size:16px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color:#9F9F9F;
+    line-height:22px;
+}
+
+/* 创建字体 */
+.creatTime-title {
+    font-size:14px;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+    color:#A0A0A0;
+    line-height:20px;
+}
+
+/* 块 */
+.content {}
+
+/* 页数 */
+.pageCount {
+    text-align: center;
+}
+
+/* 翻页按钮 */
+.button-yellow {
+    width: 124px;
+    height: 44px;
+    border-width: 1;
+    border-color: #A0A0A0;
+    background-color: transparent;
+    font-size: 18px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    color: #A0A0A0;
+    line-height: 25px;
+}
+
+.button-yellow:hover {
+    background-color: #FFE04D;
+    color: #333333;
+}

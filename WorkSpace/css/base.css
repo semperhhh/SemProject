@@ -22,14 +22,14 @@ div.shadow {
     box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.9);
 }
 div.corner-window {
-    border-radius: 5px;
-    background: rgba(200, 200, 200, 1.0);
+    background: #2D2E33;
 }
 div.cell {
     cursor: pointer;
 }
 div.cell:hover {
-    background: rgba(200, 200, 200, 0.6);
+    background:#4D4F52;
+    opacity: 0.4;
 }
 /* 导航栏 start*/
 .naviBtn {
@@ -42,8 +42,24 @@ div.cell:hover {
 .navbar-bg {
     background-color: #292F36;
 }
+
 .navbar-btn {
     background-color: #292F36;
+    color: #FFFFFF;
+    font-size:14px;
+    font-family:PingFangSC-Medium,PingFang SC;
+    font-weight:500;
+    line-height: 44px;
+}
+
+.navbar-btn:hover {
+    cursor: pointer;
+}
+
+.navBar-img {
+    background: url(../images/homeImages/home-back@2x.png);
+    font-size: 26px;
+    width: 26px;
 }
 
 .navbar-backHome {
@@ -68,17 +84,18 @@ i {
 .navbar-btn-search {
     background-color: #0A0A0B;
     border-radius: 44px;
-    width: 200px;
+    width: 240px;
+    height: 44px;
 }
 
 .navbar-btn-search-title {
     width: 84px;
-    height: 20px;
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: rgba(160, 160, 160, 1);
-    line-height: 20px;
+    line-height: 44px;
+    margin-left: 20px;
 }
 /* navi end */
 div.col-center {
@@ -92,17 +109,8 @@ div.col-center {
     height: 500px;
 }
 
-div.postsBackground {
-    background-color: white;
-}
-
 .l-center {
     text-align: center;   
-}
-
-.span-1 {
-    color:black;
-    font-weight: 800;
 }
 
 p.list_posts_tag {

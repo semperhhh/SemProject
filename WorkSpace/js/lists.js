@@ -9,24 +9,19 @@ var mainList = new Vue({
             POSTS_READED: "",
             POSTS_CATEGORY: "",
             POSTS_TAG: [],
+        },
+        {
+            POSTS_TITLE: "",
+            POSTS_CREATE_TIME: "",
+            POSTS_UPDATA_TIME: "",
+            POSTS_LIKEED: "",
+            POSTS_READED: "",
+            POSTS_CATEGORY: "",
+            POSTS_TAG: [],
         }],
         page: 0,
         beforeBtnShow: true,
         afterBtnShow: true,
-        CATEGORY_NAME_LIST: [
-            {
-                category_name: "工作",
-                category_id: 0,
-            },
-            {
-                category_name: "日常",
-                category_id: 1,
-            },
-            {
-                category_name: "平时",
-                category_id: 2,
-            },
-        ],
     },
     methods: {
         //点击了列表
@@ -69,39 +64,6 @@ var mainList = new Vue({
             }).always(function () {
                 console.log("请求完成");
             });
-        },
-
-        //点击
-        categoryAction(category_id) {
-
-            if (category_id == 0) {
-                this.jishuAction();
-            }else if (category_id == 1) {
-                this.richangAction();
-            }else if (category_id == 2) {
-                this.pingshiAction();
-            }
-        },
-        //工作
-        jishuAction() {
-            this.category = 0;
-            this.getList();
-            this.showButton();
-            this.page = 0;
-        },
-        //日常
-        richangAction() {
-            this.category = 1;
-            this.getList();
-            this.showButton();
-            this.page = 0;
-        },
-        //平时
-        pingshiAction() {
-            this.category = 2;
-            this.getList();
-            this.showButton();
-            this.page = 0;
         },
 
         //显示翻页按钮

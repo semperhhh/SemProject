@@ -36,7 +36,7 @@ app.get("/", function (request, response) {
 //列表界面
 app.get("/lists", function (request, response) {
     console.log("/lists");
-    response.sendfile(__dirname + workSpacePath + templatePath + "/list.html");
+    response.sendfile(__dirname + workSpacePath + templatePath + "/lists.html");
 });
 
 //列表内容

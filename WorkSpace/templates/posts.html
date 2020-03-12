@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <!-- 首页 -->
     <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/buttons.css">
-    <link rel="stylesheet" href="../css/markdown.css">
+    <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/posts.css">
+    <link rel="stylesheet" href="../css/markdown.css">
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <script src="../js/vue.js"></script>
     <script src="../js/jquery.min.js"></script>
     <script src="../js/tool.js"></script>
-    <script src="../js/navigationBar.js"></script>
+    <script src="../js/home/navigationBar.js"></script>
     <script src="../js/posts.js"></script>
 </head>
 
@@ -30,22 +30,29 @@
         <navigation-bar></navigation-bar>
 
         <div class="col-md-12">
-            <div style="height:80px;"></div>
-            <div class="col-md-9 postsBackground center-block">
-                <div style="height:60px;"></div>
+            <div style="height:10px;"></div>
+            
+            <div class="col-md-10 postsBackground center-block">
+                
+                <div style="height:40px;"></div>
 
                 <!-- 内容 -->
                 <div v-html="POSTS_CONTENT"></div>
 
-                <div style="height:60px;"></div>
-                <!-- 分割线 -->
-                <div class="span-1">------------------------------</div>
+                <div style="height:100px;"></div>
 
                 <div class="l-center">
                     <!-- 点赞 -->
-                    <button class="button button-glow button-rounded button-caution" v-on:click="likeClick()">赞</button>
+                    <button class="postsBtn likeBtn" v-on:click="likeClick()">
+                        <img src="../images/postsImages/posts_like@2x.png">
+                    </button>
+
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    
                     <!-- 打赏 -->
-                    <button class="button button-glow button-rounded button-royal" v-on:click="rewardClick()">赏</button>
+                    <button class="postsBtn moneyBtn" v-on:click="rewardClick()">
+                        <img src="../images/postsImages/posts_money@2x.png">
+                    </button>
                 </div>
 
                 <div style="height:60px;"></div>
@@ -56,7 +63,7 @@
 </body>
 
 <script>
-    var posts = new Vue({
+    new Vue({
         el: "#posts",
         data: { //数据
             POSTS_TITLE: "标题",

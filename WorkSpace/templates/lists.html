@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=720px, height=1280px" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>semperhhh | 博客</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <!-- 首页 -->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/lists.css">
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/home/navigationBar.js"></script>
+</head>
+
+<body class="main_index">
+    
+    <div class="box" id="main_list">
+
+        <!-- {{{navigationBar}}}  -->
+        <navigation-bar></navigation-bar>
+
+        <div class="home-back">
+
+            <!-- 列表 -->
+            <div class="col-md-10 center-block" v-for="cell in POSTS_LISTS">
+                <div class="corner-window cell" @click="list_action(cell.POSTS_TITLE)">
+
+                    <div class="col-md-12">
+                        <div style="height: 36px;"></div>
+                        <!-- 标签 -->
+                        <p class="list_posts_tag" v-for="item in cell.POSTS_TAG">
+                            <span class="badge badge-success">
+                                {{item}}
+                            </span>
+                        </p>
+                        <span class="badge badge-info">
+                            {{cell.POSTS_CATEGORY}}
+                        </span>
+
+                        <!-- 创建时间 -->
+                        <span class="creatTime-title"> · 创建于 :{{cell.POSTS_CREATE_TIME}}</span>
+
+                        <!-- 标题 -->
+                        <p class="title">{{cell.POSTS_TITLE}}</p>
+
+                        <!-- 喜欢 -->
+                        <p class="like-title">
+                            <i>{{cell.POSTS_LIKEED}} 喜欢</i>
+                            <i>&nbsp;&nbsp;&nbsp;</i>
+                            <i>{{cell.POSTS_READED}} 阅读</i>
+                        </p>
+                    </div>
+                    <div class="col-md-12" style="height:16px;"></div>
+                    <div class="col-md-12" style="height:1px;background-color: #4D4F52;"></div>
+                </div>
+            </div>
+            <div style="height:40px;"></div>
+
+            <!-- 页数 -->
+            <div class="pageCount">
+                <button class="pageCount button-yellow" @click="beforeAction()"
+                    v-if="beforeBtnShow">
+                    上一页
+                </button>
+                <button class="pageCount button-yellow" @click="afterAction()"
+                    v-if="afterBtnShow">
+                    下一页
+                </button>
+
+                <div style="height:80px;"></div>
+
+            </div>
+        </div>
+</body>
+<script src="../js/lists.js"></script>
+</html>

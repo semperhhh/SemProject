@@ -9,14 +9,14 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/buttons.css">
     <!-- home -->
     <link rel="stylesheet" href="css/home.css">
     <!-- 我的 -->
     <link rel="stylesheet" href="css/base.css">
     <script src="./js/jquery.min.js"></script>
     <script src="./js/vue.js"></script>
-    <script src="./js/navigationBar.js"></script>
+    <script src="./js/home/navigationBar.js"></script>
+    <script src="./js/home/home-left.js"></script>
     <style>
         p.text {
             color: black;
@@ -26,7 +26,6 @@
         .test1234 {
             position: relative;
         }
-        
     </style>
 </head>
 
@@ -34,25 +33,41 @@
     <div class="box" id="app">
 
         <!-- 导航栏 -->
-        <navigation-bar></navigation-bar>
-        
+        <!-- <navigation-bar></navigation-bar> -->
+
+        <nav class="col-md-10 navbar-center navbar navbar-bg naviHeight">
+            <a class="navbar-title">
+                <img src="images/homeImages/home-navi.png">
+            </a>
+            <div>
+                <ul class="nav justify-content-end">
+
+                    <!-- 搜索 -->
+                    <li class="nav-item naviBtn">
+                        <div class="navbar-btn-search">
+                            <span class="navbar-btn-search-title">搜索</span>
+                        </div>
+                    </li>
+
+                    <!-- 返回首页 -->
+                    <li class="naviBtn">
+                        <div class="navbar-btn">
+                            <img src="./images/homeImages/home-back@2x.png">
+                            <span @click="naviBackBtnClick">
+                                返回首页
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
         <div class="home-back">
 
             <div class="row home-row col-md-10 navbar-center no-gutters">
 
                 <!-- 左边 -->
-                <div class="home-left">
-                    <div class="home-left-headImg">
-                        <img class="head-img-border" src="images/homeImages/home-head-border@2x.png">
-                        <img class="head img-circle center-block" src="images/head.jpg">
-                    </div>
-                    <div class="home-left-name">semperhhhの博客</div>
-                    <ul>
-                        <li v-for="cell in CATEGORY_NAME_LIST" class="home-category-btn" @click="categoryAction(cell.category_id)">
-                            {{cell.category_name}}
-                        </li>
-                    </ul>
-                </div>
+                <home-left></home-left>
 
                 <!-- 右边 -->
                 <div class="home-right">
@@ -60,14 +75,26 @@
                         iOS入门程序员
                     </p>
                     <div class="home-right-yellow"></div>
+                    <div class="listBtn" v-on:click="listClick()">
+                        查看文章
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
 
-<!-- 引用script -->
-<script src="./js/home.js"></script>
 </body>
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
+            listClick() {
+                console.log('跳转文章列表');
+                window.location.href = "/lists";
+            },
+        }
+    })
+</script>
 
 </html>
