@@ -8,20 +8,23 @@
     <title>semperhhh | 博客</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/home.css">
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/buttons.css">
     <style>
         p.title {
             font-size: 30px;
             font-weight: 600;
             color: white;
         }
+        p {
+            color: white;
+        }
     </style>
     <script src="../js/vue.js"></script>
     <script src="../js/jquery.min.js"></script>
-    <script src="../js/navigationBar.js"></script>
+    <script src="../js/home/navigationBar.js"></script>
 </head>
 
 <body class="main_index">
@@ -31,12 +34,13 @@
 
         <div class="list-background">
 
-            <div style="height:80px;"></div>
+            <div style="height:40px;"></div>
             <div class="container">
                 <div class="row">
+
                     <div class="col corner-window">
                         <div style="height:20px;"></div>
-                        <p>iOS开发、前端入门程序员</p>
+                        <p class="title">iOS开发、前端入门程序员</p>
                         <p>技术栈基本都是前端</p>
                         <p>希望JavaScript一统天下吧哈哈哈</p>
                         <p>
@@ -48,7 +52,7 @@
                     <div style="width: 20px;"></div>
                     <div class="col corner-window">
                         <div style="height:20px;"></div>
-                        <p>动漫宅,游戏宅</p>
+                        <p class="title">动漫宅,游戏宅</p>
                         <p>Dota从2009年一直到现在变成云玩家</p>
                         <p>switch轻度玩家,可能还是不习惯任豚的画风</p>
                         <p>游戏3D眩晕症患者</p>
@@ -61,15 +65,14 @@
                 <div class="row">
                     <div class="col corner-window cell" @click="githubAction()">
                         <div style="height:20px;"></div>
-                        <p>GitHub</p>
+                        <p class="title">GitHub</p>
                         <p>佛系demo开发</p>
                         <div style="height:20px;"></div>
                     </div>
                     <div style="width: 20px;"></div>
-                    <div class="col corner-window cell"
-                        @click="juejinAction()">
+                    <div class="col corner-window cell" @click="juejinAction()">
                         <div style="height:20px;"></div>
-                        <p>掘金</p>
+                        <p class="title">掘金</p>
                         <p>没有能够上台面的分享</p>
                         <div style="height:20px;"></div>
                     </div>
@@ -80,7 +83,7 @@
                 <div class="row">
                     <div class="col corner-window cell">
                         <div style="height:20px;"></div>
-                        <p>个人简历</p>
+                        <p class="title">个人简历</p>
                         <div style="height:20px;"></div>
                     </div>
                     <div style="width: 20px;"></div>
@@ -101,7 +104,7 @@
                 <div style="height: 10px"></div>
 
                 <div class="row">
-                    <div class="col corner-window cell">
+                    <div class="col corner-window cell" v-on:click="catIdentAction()">
                         <div style="height:20px;"></div>
                         <p>CatIdent</p>
                         <p>开发中...</p>
@@ -112,20 +115,26 @@
             <div style="height:80px;"></div>
         </div>
     </div>
-    </div>
 </body>
 <script>
     new Vue({
         el: "#main_about",
         methods: {
+
             githubAction() {
                 window.location.href = 'https://github.com/semperhhh';
             },
+
             juejinAction() {
                 window.location.href = 'https://juejin.im/user/,58ff25b65c497d00581169f5';
             },
+
             weiboAction() {
                 window.location.href = 'http://weibo.com/semperhhh';
+            },
+            // 猫鉴定
+            catIdentAction() {
+                window.location.href = 'https://github.com/semperhhh/CatIdent-swift';
             },
         }
     })

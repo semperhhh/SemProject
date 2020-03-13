@@ -97,6 +97,11 @@ i {
     line-height: 44px;
     margin-left: 20px;
 }
+
+.navbar-title:hover {
+    cursor: pointer;
+}
+
 /* navi end */
 div.col-center {
     float:none;

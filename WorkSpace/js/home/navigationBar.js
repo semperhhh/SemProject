@@ -1,7 +1,7 @@
 Vue.component('navigation-bar', {
     template: `
     <nav class="col-md-10 navbar-center navbar navbar-bg naviHeight">
-            <a class="navbar-title">
+            <a class="navbar-title" @click="naviBackBtnClick()">
                 <img src="images/homeImages/home-navi.png">
             </a>
             <div>
@@ -14,15 +14,15 @@ Vue.component('navigation-bar', {
                         </div>
                     </li>
 
-                    <!-- 返回首页 -->
+                    <!-- 关于 -->
                     <li class="naviBtn">
-                        <div class="navbar-btn">
-                            <img src="./images/homeImages/home-back@2x.png">
-                            <span @click="naviBackBtnClick">
-                                返回首页
-                            </span>
-                        </div>
-                    </li>
+                    <div class="navbar-btn">
+                        <img src="./images/homeImages/home-back@2x.png">
+                        <span @click="naviAboutBtnClick()">
+                            关于
+                        </span>
+                    </div>
+                </li>
                 </ul>
             </div>
         </nav>
@@ -31,6 +31,10 @@ Vue.component('navigation-bar', {
         naviBackBtnClick() {
             console.log("返回首页");
             window.location.href = "/";
+        },
+        naviAboutBtnClick() {
+            console.log("跳转关于");
+            window.location.href = "/about";
         },
     }
 })
