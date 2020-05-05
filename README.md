@@ -5,4 +5,4 @@
 
 敬请期待...
 
-![picture-01](/Users/zhangpenghui/Desktop/SemmmProject/picture-03.jpg)
+![picture-01](../picture-01.jpg)
