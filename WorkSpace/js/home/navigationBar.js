@@ -17,7 +17,6 @@ Vue.component('navigation-bar', {
                     <!-- 关于 -->
                     <li class="naviBtn">
                     <div class="navbar-btn">
-                        <img src="./images/homeImages/home-back@2x.png">
                         <span @click="naviAboutBtnClick()">
                             关于
                         </span>

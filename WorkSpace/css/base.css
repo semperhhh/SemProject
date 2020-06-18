@@ -6,7 +6,7 @@
 
 body.main_index {
     background: url(../images/background.jpg);
-    /* background-color: black; */
+    /* background-color: rgba(100, 100, 100, 1); */
     background-position: center top;
     background-repeat: no-repeat;
     background-attachment: fixed;
