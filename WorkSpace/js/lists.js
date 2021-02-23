@@ -34,7 +34,7 @@ var mainList = new Vue({
             console.log("ajax加载列表");
             var _this = this;
             $.get("/lists/query", {
-                page: _this.page, //页数
+                // page: _this.page, //页数
                 category: _this.category, //分类
             }).done(function (data) {
 
@@ -42,8 +42,8 @@ var mainList = new Vue({
 
                 var lists = data;
 
+                /* 取消页数设置
                 if (isAfterAction) {
-
                     if (lists.length == 0) { //是否展示下一页                    
                         alert("已经是最后一页");
                         _this.page -= 1;
@@ -53,6 +53,7 @@ var mainList = new Vue({
                         _this.afterBtnShow = true;
                     }
                 }
+                */
                 _this.POSTS_LISTS = lists; //赋值
 
                 //滚动

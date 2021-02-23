@@ -32,16 +32,25 @@ function queryHome(callback) {
     page 页数
 */
 function queryLists(page, category, callback) {
-    var sqlCount = (page ? page : 0) * 10; //如果没有默认1
-
     var sqlStr, sqlParam;
-    if (category) {
-        sqlStr = 'select * from postslist where category = ? order by id desc limit 10 offset ?';
-        sqlParam = [category, sqlCount];
+    if(page) {
+        var sqlCount = (page ? page : 0) * 10; //如果没有默认1
+        if (category) {
+            sqlStr = 'select * from postslist where category = ? order by id desc limit 10 offset ?';
+            sqlParam = [category, sqlCount];
+        } else {
+            sqlStr = 'select * from postslist order by id desc limit 10 offset ?';
+            sqlParam = [sqlCount];
+        }
     } else {
-        sqlStr = 'select * from postslist order by id desc limit 10 offset ?';
-        sqlParam = [sqlCount];
+        if (category) {
+            sqlStr = 'select * from postslist where category = ? order by id desc';
+            sqlParam = [category];
+        } else {
+            sqlStr = 'select * from postslist order by id desc';
+        }
     }
+
     connection.query(sqlStr, sqlParam, function (error, results, fields) {
         if (error) {
             throw error;
