@@ -55,6 +55,8 @@ struct objc_class {
 //这与objc_object结构体相同.然而,objc_object结构体和objc_class结构体归根结底是在各个对象和类的实现中使用的最基本的结构体
 ```
 
+id可以是任意类型的对象,不局限于NSObject.他的本质就是一个指向对象的指针.
+
 这里需要理解一下Objective-c的类与对象的实质,各类的结构体就是基于objc_class结构体的class_t结构体.class_t结构体在objc4运行时库中的声明
 
 ```Objective-c
@@ -70,6 +72,9 @@ struct class_t {
 class_t结构体实例持有声明的成员变量,方法名称,方法的实现(函数指针),属性以及父类的指针,并被Objective-c运行时库所使用.
 
 在__main_block_impl_0结构体相当于基于objc_object结构体的objective-c类对象的结构体.
+
+对block执行`block superClass`可以->`NSBlock`->`NSObject`
+
 即_NSConcreteStackBlock相当于class_t结构体实例.在将Block作为Objective-c的对象处理时,关于该类的信息放置于_NSConcreteStackBlock中.
 
 #### 截获自动变量值
@@ -116,6 +121,12 @@ struct __Block_byref_val_0 {
 ```
 
 在给__block变量赋值时,__Block_byref_val_0结构体实例的成员变量__forwarding持有指向该实例自身的指针.通过成员变量__forwarding访问成员变量val.通过访问val的指针,就可以从多个Block中使用同一个__block变量.
+
+### 截获对象
+
+block捕获对象时只是捕获了指向该对象的指针, 所以修改对象中的属性是没有问题的,但是不可以直接修改对象内存地址.
+
+__block修饰的对象,在创建的时候也被__Block_byref_val_0包含.
 
 #### Block存储域
 
@@ -191,8 +202,56 @@ ARC下,有两种方法可以解决循环引用问题:
 
 ### 补充关于weak
 
-weak修饰属性,这个问题就好像iOS程序员之间打招呼的方式一样.
 weak表示一个由``runtime``维护的hash表,key是所指对象的地址,value是weak指针的地址数组.
+系统维护`SideTables`中有SideTable,SideTable包含`weak_table_t`.
+
+```Swift
+
+struct weak_table_t {
+    weak_entry_t *weak_entries;
+    size_t    num_entries;
+    uintptr_t mask;
+    uintptr_t max_hash_displacement;
+};
+
+struct weak_entry_t {
+    DisguisedPtr<objc_object> referent;
+    union {
+        struct {
+            weak_referrer_t *referrers;
+            uintptr_t        out_of_line_ness : 2;
+            uintptr_t        num_refs : PTR_MINUS_2;
+            uintptr_t        mask;
+            uintptr_t        max_hash_displacement;
+        };
+        struct {
+            // out_of_line_ness field is low bits of inline_referrers[1]
+            weak_referrer_t  inline_referrers[WEAK_INLINE_COUNT];
+        };
+    };
+
+    bool out_of_line() {
+        return (out_of_line_ness == REFERRERS_OUT_OF_LINE);
+    }
+
+    weak_entry_t& operator=(const weak_entry_t& other) {
+        memcpy(this, &other, sizeof(other));
+        return *this;
+    }
+
+    weak_entry_t(objc_object *newReferent, objc_object **newReferrer)
+        : referent(newReferent)
+    {
+        inline_referrers[0] = newReferrer;
+        for (int i = 1; i < WEAK_INLINE_COUNT; i++) {
+            inline_referrers[i] = nil;
+        }
+    }
+};
+
+
+```
+
 weak是弱引用,所引用对象的计数器不会加1,并在引用对象被释放的时候自动被设置为nil.这是因为:
 
 * ``runtime``会对注册的类进行布局,当此对象的引用次数为0时释放对象,在weak表中以对象地址为键搜索,将搜索到的weak对象置为nil
