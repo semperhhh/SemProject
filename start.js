@@ -28,15 +28,15 @@ function heartbeatCount() {
 }
 
 //首页
-app.get("/", function (request, response) {
-    console.log("/home");
-    response.sendfile(__dirname + workSpacePath + "/index.html");
-});
+// app.get("/", function (request, response) {
+    // console.log("/");
+    // response.sendfile(__dirname + workSpacePath + "/index.html");
+// });
 
 //列表界面
 app.get("/lists", function (request, response) {
-    console.log("/lists");
-    response.sendfile(__dirname + workSpacePath + templatePath + "/lists.html");
+    console.log("/lists" + __dirname + workSpacePath + templatePath + "/lists.html");
+    response.sendFile(__dirname + workSpacePath + templatePath + "/lists.html");
 });
 
 //列表内容
@@ -96,7 +96,7 @@ app.get("/lists/query", function (request, response) {
 //文章
 app.get("/posts", function (request, response) {
     console.log("/posts");
-    response.sendfile(__dirname + workSpacePath + templatePath + "/posts.html");
+    response.sendFile(__dirname + workSpacePath + templatePath + "/posts.html");
 })
 
 //文章内容
@@ -136,7 +136,7 @@ app.get("/posts/like", function (request, response) {
 //关于
 app.get("/about", function (request, response) {
     console.log("/about");
-    response.sendfile(__dirname + workSpacePath + templatePath + "/about.html");
+    response.sendFile(__dirname + workSpacePath + templatePath + "/about.html");
 })
 
 app.use(express.static(path.join(__dirname + workSpacePath))); //指定静态文件目录

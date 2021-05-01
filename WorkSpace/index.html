@@ -26,6 +26,12 @@
         .test1234 {
             position: relative;
         }
+        #firstSpace {
+            height: 80px;
+        }
+        #secondSpace {
+            height: 80px;
+        }
     </style>
 </head>
 
@@ -37,22 +43,20 @@
 
         <div class="home-back">
 
-            <div class="row home-row col-md-10 navbar-center no-gutters">
-
-                <!-- 左边 -->
-                <home-left></home-left>
-
-                <!-- 右边 -->
-                <div class="home-right">
-                    <p class="home-right-content">
-                        iOS入门程序员
-                    </p>
-                    <div class="home-right-yellow"></div>
-                    <div class="listBtn" v-on:click="listClick()">
-                        查看文章
+            <div class="col-md-12" style="min-height: 800px;">
+                <div class="col-md-12 column">
+                    <div id="firstSpace"></div>
+                    <div class="col-md-5 col-center" style="width: 600px">
+                        <div id="secondSpace"></div>
+                        <img class="home-left-headImg img-circle center-block" src="images/head.jpg">
+                        <p class="text text-center">semperhhh</p>
+                        <p class="text text-center">iOS</p>
+                        <hr style="background-color: white"/>
+                        <div class="listBtn center-block" v-on:click="listClick()">
+                            查看文章
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -66,7 +70,7 @@
         },
         methods: {
             listClick() {
-                console.log('跳转文章列表');
+                // 跳转文章列表
                 window.location.href = "/lists";
             },
         }
