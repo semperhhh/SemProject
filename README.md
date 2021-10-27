@@ -9,5 +9,7 @@
 
 [[OC kvo学习](./WorkSpace/templates/static/新年快乐.md)]
 
+[[iOS的UI控件-UIPageConrol](./WorkSpace/templates/static/iOS的UI控件-UIPageConrol.md)]
+
 --- 其他杂项 ---
 
